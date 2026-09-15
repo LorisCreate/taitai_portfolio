@@ -61,7 +61,8 @@ export function SiteHeader() {
           <nav className="hidden items-center gap-10 lg:flex">
             <ul className="flex items-center gap-9">
               {navItems.map((item) => {
-                const active = pathname === item.href;
+                const active =
+                  pathname === item.href || pathname.startsWith(`${item.href}/`);
                 return (
                   <li key={item.href}>
                     <Link

@@ -94,56 +94,165 @@ export const instagramFeed = [
   "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
 ];
 
-export const galleryWorks = [
+export type GalleryWork = {
+  slug: string;
+  title: string;
+  tag: string;
+  date: string;
+  image: string;
+  images: string[];
+  body: string;
+};
+
+export const galleryWorks: GalleryWork[] = [
   {
+    slug: "morning-table",
     title: "朝のテーブル",
-    category: "フード",
+    tag: "food",
+    date: "2025.03",
     image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "朝の光が差し込むテーブル。湯気と器の気配が残る、日常のフードカットです。宿泊施設の朝食ページのために撮影しました。",
   },
   {
+    slug: "window-portrait",
     title: "窓辺の肖像",
-    category: "人物",
+    tag: "portrait",
+    date: "2025.01",
     image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "レース越しの光で撮ったポートレート。輪郭を強くせず、肌のトーンと空気感を優先しています。",
   },
   {
+    slug: "forest-wedding",
     title: "森のウェディング",
-    category: "ハレの日",
+    tag: "wedding",
+    date: "2024.10",
     image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "森の中での挙式。グリーンとドレスの白がほどよく分かれるよう、露出は少しだけ抑えめにしています。",
   },
   {
+    slug: "architecture-light",
     title: "建築と光",
-    category: "建築",
+    tag: "architecture",
+    date: "2024.08",
     image:
-      "https://images.unsplash.com/photo-1487958449943-2429e8be8627?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1487958449943-2429e8be8627?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1487958449943-2429e8be8627?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "開口部から落ちる光を軸にした建築写真。空間の広さより、時間帯の気配が残るように撮っています。",
   },
   {
+    slug: "flower-and-shadow",
     title: "花と影",
-    category: "スチル",
+    tag: "still",
+    date: "2024.05",
     image:
-      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "窓際で撮ったスチル。花の輪郭より、影の落ち方を先に決めてフレーミングしました。",
   },
   {
+    slug: "afternoon-away",
     title: "旅先の午後",
-    category: "ライフワーク",
+    tag: "life",
+    date: "2024.03",
     image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "旅先で出会った午後の景色。観光地らしい記号は外し、その土地の光だけが残るようにしています。",
   },
   {
+    slug: "studio-portrait",
     title: "スタジオポートレート",
-    category: "人物",
+    tag: "portrait",
+    date: "2023.11",
     image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "秋保スタジオでのポートレート。レフは最小限にし、自然光に近いグラデーションを残しました。",
   },
   {
+    slug: "night-dining",
     title: "夜のダイニング",
-    category: "フード",
+    tag: "food",
+    date: "2023.09",
     image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "夜のレストラン撮影。照明は既存のものを活かし、料理が主張しすぎないトーンに整えています。",
+  },
+  {
+    slug: "paper-and-type",
+    title: "紙と文字",
+    tag: "graphic",
+    date: "2023.06",
+    image:
+      "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "印刷物とウェブのトーンを揃えたグラフィック。余白と文字組を先に決め、写真はそのあとに載せています。",
+  },
+  {
+    slug: "site-for-atelier",
+    title: "アトリエのサイト",
+    tag: "web",
+    date: "2023.04",
+    image:
+      "https://images.unsplash.com/photo-1499750310107-5fef28a37e15?auto=format&fit=crop&w=1400&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1499750310107-5fef28a37e15?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1400&q=80",
+    ],
+    body: "フォトグラファーのポートフォリオサイト。写真が主役になるよう、文字は小さく、余白は広く取っています。",
   },
 ];
+
+export const galleryCategories = [
+  "all",
+  "food",
+  "portrait",
+  "wedding",
+  "architecture",
+  "still",
+  "life",
+  "graphic",
+  "web",
+] as const;
+
+export function getGalleryWork(slug: string) {
+  return galleryWorks.find((work) => work.slug === slug);
+}
 
 export const events = [
   {
