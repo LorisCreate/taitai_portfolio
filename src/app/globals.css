@@ -66,6 +66,39 @@ body {
   will-change: transform;
 }
 
+.contact-submit {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #000;
+  display: flex;
+  font-size: 13px;
+  height: 88px;
+  justify-content: center;
+  letter-spacing: 0.16em;
+  transition: border-radius 0.35s ease;
+  width: 88px;
+}
+
+.contact-submit:disabled {
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .contact-submit {
+    border-radius: 0;
+  }
+
+  .contact-submit:hover:not(:disabled) {
+    border-radius: 9999px;
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-submit {
+    border-radius: 9999px;
+  }
+}
+
 .gallery-front {
   animation: gallery-front 0.55s ease both;
 }
