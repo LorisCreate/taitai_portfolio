@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navItems, site } from "@/lib/site";
 
@@ -106,11 +105,25 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center lg:hidden"
-            aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+            className="relative z-[60] flex min-w-[40px] flex-col items-center justify-center gap-1.5 lg:hidden"
+            aria-label={open ? "close" : "open"}
+            aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X className="h-5 w-5" strokeWidth={1.4} /> : <Menu className="h-5 w-5" strokeWidth={1.4} />}
+            {open ? (
+              <span className="relative block h-3.5 w-3.5" aria-hidden="true">
+                <span className="absolute top-1/2 left-0 h-[1.5px] w-full -translate-y-1/2 rotate-45 bg-black" />
+                <span className="absolute top-1/2 left-0 h-[1.5px] w-full -translate-y-1/2 -rotate-45 bg-black" />
+              </span>
+            ) : (
+              <span className="flex h-2.5 w-4 flex-col justify-between" aria-hidden="true">
+                <span className="h-[1.5px] w-full bg-black" />
+                <span className="h-[1.5px] w-full bg-black" />
+              </span>
+            )}
+            <span className="ff-en text-[9px] leading-none tracking-[0.18em]">
+              {open ? "close" : "open"}
+            </span>
           </button>
         </div>
       </header>
