@@ -50,17 +50,13 @@ export function SiteHeader() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 bg-white">
-        <div className="mx-auto flex h-[88px] max-w-[1200px] items-center justify-between px-6 md:h-[110px] md:px-8 lg:h-[130px]">
+        <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6 md:h-[88px] md:px-8 lg:h-[100px]">
           <Link
             href="/"
-            className="ff-en leading-[1.85] tracking-[0.12em]"
+            className="text-[14px] font-normal tracking-[0.2em] md:text-[15px]"
             onClick={() => setOpen(false)}
           >
-            <span className="block text-[13px] md:text-[14px]">{site.name}</span>
-            <span className="block text-[13px] font-normal tracking-[0.2em] md:text-[14px]">
-              {site.person}
-            </span>
-            <span className="block text-[13px] md:text-[14px]">{site.role}</span>
+            {site.person}
           </Link>
 
           <nav className="hidden items-center gap-10 lg:flex">
