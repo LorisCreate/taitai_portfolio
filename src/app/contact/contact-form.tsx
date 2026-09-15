@@ -84,6 +84,9 @@ export function ContactForm() {
           </option>
           <option value="お仕事依頼">お仕事依頼</option>
           <option value="展示会のご案内">展示会のご案内</option>
+          <option value="その他（お問い合わせ内容に詳細をお願いします）">
+            その他（お問い合わせ内容に詳細をお願いします）
+          </option>
         </select>
       </div>
 
