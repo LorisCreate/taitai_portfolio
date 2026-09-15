@@ -116,7 +116,7 @@ export function SiteHeader() {
       </header>
 
       {open ? (
-        <div className="fixed inset-0 z-40 bg-white pt-[88px] lg:hidden">
+        <div className="fixed inset-0 z-40 bg-white pt-[72px] lg:hidden">
           <nav className="flex h-full flex-col px-8 pt-10">
             <ul className="space-y-6">
               {navItems.map((item) => (
