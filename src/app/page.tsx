@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroSlider } from "@/components/hero-slider";
+import { Reveal } from "@/components/reveal";
 import { TextLink } from "@/components/text-link";
 import { WorksSlider } from "@/components/works-slider";
 import {
@@ -19,7 +20,7 @@ export default function Home() {
         <HeroSlider />
 
         <section className="relative z-10 mt-12 flex justify-end md:-mt-12">
-          <div className="w-full bg-white px-6 py-8 md:w-[42%] md:px-9 md:py-8">
+          <Reveal className="w-full bg-white px-6 py-8 md:w-[42%] md:px-9 md:py-8">
             <div className="flex items-center justify-between">
               <h2 className="ff-en text-[15px] tracking-[0.14em]">what’s new</h2>
               <TextLink href="/event">all view</TextLink>
@@ -38,10 +39,11 @@ export default function Home() {
                 </a>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
-        <section
+        <Reveal
+          as="section"
           id="about"
           className="mt-16 grid items-end gap-10 md:mt-24 md:grid-cols-[1.15fr_0.85fr] md:gap-16"
         >
@@ -75,9 +77,9 @@ export default function Home() {
               className="h-auto w-full object-cover"
             />
           </figure>
-        </section>
+        </Reveal>
 
-        <section id="design" className="mt-24 md:mt-36">
+        <Reveal as="section" id="design" className="mt-24 md:mt-36">
           <h2 className="ff-mi text-[28px] tracking-[0.2em] md:text-[36px]">
             デザインしてます
           </h2>
@@ -112,9 +114,9 @@ export default function Home() {
               <TextLink href="/gallery">view more</TextLink>
             </div>
           </div>
-        </section>
+        </Reveal>
 
-        <section id="photograph" className="mt-24 md:mt-36">
+        <Reveal as="section" id="photograph" className="mt-24 md:mt-36">
           <h2 className="ff-mi text-[28px] tracking-[0.2em] md:text-[36px]">
             写真を撮ります
           </h2>
@@ -149,9 +151,9 @@ export default function Home() {
               <TextLink href="/gallery">view more</TextLink>
             </div>
           </div>
-        </section>
+        </Reveal>
 
-        <section id="works" className="mt-24 md:mt-36">
+        <Reveal as="section" id="works" className="mt-24 md:mt-36">
           <div className="flex flex-wrap items-center gap-4">
             <h2 className="ff-en text-[36px] tracking-[0.18em] md:text-[52px]">
               my works
@@ -166,9 +168,9 @@ export default function Home() {
           <div className="mt-8 text-right">
             <TextLink href="/gallery">all view</TextLink>
           </div>
-        </section>
+        </Reveal>
 
-        <section id="instagram" className="mt-24 md:mt-32">
+        <Reveal as="section" id="instagram" className="mt-24 md:mt-32">
           <div className="flex flex-wrap items-end gap-4">
             <h2 className="ff-en text-[32px] tracking-[0.18em] md:text-[36px]">
               instagram
@@ -199,10 +201,10 @@ export default function Home() {
               follow @atelier516
             </TextLink>
           </div>
-        </section>
+        </Reveal>
       </div>
 
-      <section id="contact" className="mt-28 bg-[#f3f3f3] md:mt-40">
+      <Reveal as="section" id="contact" className="mt-28 bg-[#f3f3f3] md:mt-40">
         <div className="mx-auto max-w-[1200px] px-6 py-16 text-center md:px-8 md:py-20">
           <h2 className="ff-en text-[48px] leading-none tracking-[0.18em] md:text-[64px]">
             contact
@@ -223,7 +225,7 @@ export default function Home() {
             何でもお気軽にどうぞ。お問合わせお待ちしております。
           </p>
         </div>
-      </section>
+      </Reveal>
     </main>
   );
 }
