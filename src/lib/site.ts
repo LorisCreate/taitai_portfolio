@@ -1,6 +1,6 @@
 export const site = {
   name: "ATELIER 516",
-  person: "HIKARI SATO",
+  person: "たいたい",
   role: "PHOTOGRAPHER",
   tagline: "web design, graphic design, photograph,\ntravel, column, wakuwaku and more..",
   instagram: "https://www.instagram.com/",

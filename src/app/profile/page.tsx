@@ -20,7 +20,7 @@ export default function ProfilePage() {
         <figure>
           <Image
             src={aboutPortrait}
-            alt="佐藤 光"
+            alt="たいたい"
             width={800}
             height={1000}
             className="h-auto w-full object-cover"
@@ -28,8 +28,7 @@ export default function ProfilePage() {
         </figure>
         <div>
           <p className="ff-en text-[13px] tracking-[0.16em]">photographer / designer</p>
-          <h2 className="ff-mi mt-3 text-[28px] tracking-[0.2em] md:text-[36px]">佐藤 光</h2>
-          <p className="ff-en mt-1 text-[14px] tracking-[0.14em]">Hikari Sato</p>
+          <h2 className="ff-mi mt-3 text-[28px] tracking-[0.2em] md:text-[36px]">たいたい</h2>
           <p className="mt-8">
             仙台・秋保を拠点に活動するフリーランスのフォトグラファー／デザイナー。
             広告写真を中心に、WEBサイトのディレクションからデザイン、構築までワンストップで担当しています。

@@ -57,7 +57,9 @@ export function SiteHeader() {
             onClick={() => setOpen(false)}
           >
             <span className="block text-[13px] md:text-[14px]">{site.name}</span>
-            <span className="block text-[13px] md:text-[14px]">{site.person}</span>
+            <span className="block text-[13px] font-normal tracking-[0.2em] md:text-[14px]">
+              {site.person}
+            </span>
             <span className="block text-[13px] md:text-[14px]">{site.role}</span>
           </Link>
 

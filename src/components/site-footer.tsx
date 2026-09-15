@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="hidden items-end justify-between border-t border-black pt-10 md:flex">
           <Link href="/" className="ff-en text-[13px] leading-[1.85] tracking-[0.12em]">
             <span className="block">{site.name}</span>
-            <span className="block">{site.person}</span>
+            <span className="block font-normal tracking-[0.2em]">{site.person}</span>
           </Link>
           <ul className="flex gap-8 text-[13px] tracking-[0.12em]">
             {navItems.map((item) => (
