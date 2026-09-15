@@ -75,7 +75,7 @@ body {
   height: 88px;
   justify-content: center;
   letter-spacing: 0.16em;
-  transition: border-radius 0.35s ease;
+  transition: border-radius 0.85s cubic-bezier(0.22, 1, 0.36, 1);
   width: 88px;
 }
 
@@ -89,7 +89,7 @@ body {
   }
 
   .contact-submit:hover:not(:disabled) {
-    border-radius: 9999px;
+    border-radius: 50%;
   }
 }
 
