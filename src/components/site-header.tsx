@@ -1,0 +1,149 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { navItems, site } from "@/lib/site";
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    >
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+    >
+      <path d="M18.244 2H21.5l-7.5 8.57L22.5 22h-6.59l-5.16-6.74L5.2 22H1.93l8.02-9.16L1.5 2h6.76l4.66 6.18L18.244 2zm-1.16 18.12h1.83L7.01 3.78H5.05l12.034 16.34z" />
+    </svg>
+  );
+}
+
+export function SiteHeader() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 bg-white">
+        <div className="mx-auto flex h-[88px] max-w-[1200px] items-center justify-between px-6 md:h-[110px] md:px-8 lg:h-[130px]">
+          <Link
+            href="/"
+            className="ff-en leading-[1.85] tracking-[0.12em]"
+            onClick={() => setOpen(false)}
+          >
+            <span className="block text-[13px] md:text-[14px]">{site.name}</span>
+            <span className="block text-[13px] md:text-[14px]">{site.person}</span>
+            <span className="block text-[13px] md:text-[14px]">{site.role}</span>
+          </Link>
+
+          <nav className="hidden items-center gap-10 lg:flex">
+            <ul className="flex items-center gap-9">
+              {navItems.map((item) => {
+                const active = pathname === item.href;
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="ff-en group relative inline-block text-[14px] leading-none tracking-[0.14em]"
+                    >
+                      {item.label}
+                      <span
+                        className={`absolute top-1/2 -right-3.5 h-1.5 w-1.5 -translate-y-1/2 bg-black transition-transform duration-300 ${
+                          active
+                            ? "scale-100"
+                            : "scale-0 group-hover:scale-100"
+                        }`}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="flex items-center gap-4 pl-2">
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="text-black transition-opacity hover:opacity-55"
+              >
+                <InstagramIcon className="h-5 w-5" />
+              </a>
+              <a
+                href={site.x}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="X"
+                className="text-black transition-opacity hover:opacity-55"
+              >
+                <XIcon className="h-[18px] w-[18px]" />
+              </a>
+            </div>
+          </nav>
+
+          <button
+            type="button"
+            className="flex h-10 w-10 items-center justify-center lg:hidden"
+            aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" strokeWidth={1.4} /> : <Menu className="h-5 w-5" strokeWidth={1.4} />}
+          </button>
+        </div>
+      </header>
+
+      {open ? (
+        <div className="fixed inset-0 z-40 bg-white pt-[88px] lg:hidden">
+          <nav className="flex h-full flex-col px-8 pt-10">
+            <ul className="space-y-6">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="ff-en text-[22px] tracking-[0.16em]"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-12 flex items-center gap-5">
+              <a href={site.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
+                <InstagramIcon className="h-5 w-5" />
+              </a>
+              <a href={site.x} target="_blank" rel="noreferrer" aria-label="X">
+                <XIcon className="h-[18px] w-[18px]" />
+              </a>
+            </div>
+          </nav>
+        </div>
+      ) : null}
+    </>
+  );
+}

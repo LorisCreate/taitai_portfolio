@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans-jp);
+  --font-en: var(--font-jost);
+  --font-serif: var(--font-mincho);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fff;
+  color: #000;
+  font-family: var(--font-sans-jp), "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 2.1;
+}
+
+.ff-en {
+  font-family: var(--font-jost), "Helvetica Neue", sans-serif;
+  font-weight: 300;
+}
+
+.ff-mi {
+  font-family: var(--font-mincho), "Yu Mincho", serif;
+  font-weight: 500;
+}
+
+.text-link {
+  display: inline-block;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  position: relative;
+}
+
+.text-link::after {
+  background: #000;
+  bottom: -4px;
+  content: "";
+  height: 1px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.page-hero {
+  border: 8px solid #000;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 56px 24px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 12px;
+  }
+
+  .page-hero {
+    border-width: 6px;
+    padding: 40px 12px;
+  }
+}
