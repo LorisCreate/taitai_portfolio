@@ -130,7 +130,7 @@ export function SiteHeader() {
 
       {open ? (
         <div className="fixed inset-0 z-40 bg-white pt-[72px] lg:hidden">
-          <nav className="flex h-full flex-col px-8 pt-10">
+          <nav className="flex h-full flex-col items-center px-8 pt-10 text-center">
             <ul className="space-y-6">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -144,7 +144,7 @@ export function SiteHeader() {
                 </li>
               ))}
             </ul>
-            <div className="mt-12 flex items-center gap-5">
+            <div className="mt-12 flex items-center justify-center gap-5">
               <a href={site.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
                 <InstagramIcon className="h-5 w-5" />
               </a>
