@@ -7,6 +7,9 @@ export const site = {
   x: "https://x.com/",
 };
 
+/** Set to true to show the homepage my works pickup again. */
+export const showMyWorks = false;
+
 export const navItems = [
   { href: "/gallery", label: "Gallery" },
   { href: "/profile", label: "Profile" },

@@ -10,6 +10,7 @@ import {
   instagramFeed,
   news,
   photoImages,
+  showMyWorks,
   site,
 } from "@/lib/site";
 
@@ -156,22 +157,24 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <Reveal as="section" id="works" className="mt-24 md:mt-36">
-          <div className="flex flex-wrap items-center gap-4">
-            <h2 className="ff-en text-[36px] tracking-[0.18em] md:text-[52px]">
-              my works
-            </h2>
-            <span className="ff-en bg-black px-5 py-1 text-[12px] tracking-[0.14em] text-white md:text-[14px]">
-              pick up
-            </span>
-          </div>
-          <div className="mt-8 max-w-[820px]">
-            <WorksSlider />
-          </div>
-          <div className="mt-8 text-right">
-            <TextLink href="/gallery">all view</TextLink>
-          </div>
-        </Reveal>
+        {showMyWorks ? (
+          <Reveal as="section" id="works" className="mt-24 md:mt-36">
+            <div className="flex flex-wrap items-center gap-4">
+              <h2 className="ff-en text-[36px] tracking-[0.18em] md:text-[52px]">
+                my works
+              </h2>
+              <span className="ff-en bg-black px-5 py-1 text-[12px] tracking-[0.14em] text-white md:text-[14px]">
+                pick up
+              </span>
+            </div>
+            <div className="mt-8 max-w-[820px]">
+              <WorksSlider />
+            </div>
+            <div className="mt-8 text-right">
+              <TextLink href="/gallery">all view</TextLink>
+            </div>
+          </Reveal>
+        ) : null}
 
         <Reveal as="section" id="instagram" className="mt-24 md:mt-32">
           <div className="flex flex-wrap items-end gap-4">
