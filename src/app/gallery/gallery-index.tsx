@@ -93,7 +93,7 @@ export function GalleryIndex() {
             pickup works
           </p>
           <div
-            className="flex flex-wrap items-center gap-x-6 gap-y-2 md:gap-x-8"
+            className="flex flex-wrap items-center gap-2 md:gap-2.5"
             role="tablist"
             aria-label="作品の絞り込み"
           >
@@ -106,10 +106,8 @@ export function GalleryIndex() {
                   role="tab"
                   aria-selected={selected}
                   onClick={() => selectFilter(item)}
-                  className={`${item === "ALL" ? "ff-en" : ""} text-[13px] tracking-[0.16em] md:text-[14px] ${
-                    selected
-                      ? "underline decoration-1 underline-offset-8"
-                      : "opacity-40 hover:opacity-100"
+                  className={`gallery-filter ${item === "ALL" ? "ff-en" : ""} text-[12px] md:text-[13px] ${
+                    selected ? "is-on" : ""
                   }`}
                 >
                   {item}

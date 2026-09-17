@@ -77,6 +77,25 @@ body {
   position: relative;
 }
 
+.gallery-filter {
+  background: #fff;
+  border: 1px solid #f78a05;
+  border-radius: 4px;
+  color: #5a401a;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  min-width: 6.8em;
+  padding: 0.5em 1.15em;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.gallery-filter.is-on {
+  background: #f78a05;
+  border-color: #f78a05;
+  color: #fff;
+}
+
 .section-veil::before {
   background: linear-gradient(
     180deg,
