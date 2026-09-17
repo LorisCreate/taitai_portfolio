@@ -1,186 +1,99 @@
-"use client";
+import { getXTimeline, X_SCREEN_NAME } from "@/lib/x-timeline";
 
-import { useEffect, useRef, useState } from "react";
+export async function XTimeline() {
+  let posts: Awaited<ReturnType<typeof getXTimeline>> = [];
+  let failed = false;
 
-const SCREEN_NAME = "taitai_pon";
-const WIDGETS_SRC = "https://platform.twitter.com/widgets.js";
-
-declare global {
-  interface Window {
-    twttr?: {
-      widgets: {
-        createTimeline: (
-          source: { sourceType: string; screenName: string },
-          element: HTMLElement,
-          options?: Record<string, string | number | boolean>,
-        ) => Promise<HTMLElement | undefined>;
-      };
-      ready: (callback: () => void) => void;
-    };
+  try {
+    posts = await getXTimeline();
+  } catch {
+    failed = true;
   }
-}
 
-function loadTwitterWidgets() {
-  return new Promise<NonNullable<Window["twttr"]>>((resolve, reject) => {
-    const finish = () => {
-      if (window.twttr?.ready) {
-        window.twttr.ready(() => {
-          if (window.twttr) resolve(window.twttr);
-        });
-        return;
-      }
-      reject(new Error("Twitter widgets unavailable"));
-    };
-
-    if (window.twttr?.widgets) {
-      finish();
-      return;
-    }
-
-    const existing = document.querySelector<HTMLScriptElement>(
-      `script[src="${WIDGETS_SRC}"]`,
+  if (failed || posts.length === 0) {
+    return (
+      <p className="text-[13px] tracking-[0.08em]">
+        タイムラインを読み込めませんでした。
+        <a
+          className="ml-2 underline"
+          href={`https://x.com/${X_SCREEN_NAME}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          @{X_SCREEN_NAME} をXで見る
+        </a>
+      </p>
     );
-
-    if (existing) {
-      existing.addEventListener("load", finish, { once: true });
-      existing.addEventListener(
-        "error",
-        () => reject(new Error("Failed to load widgets.js")),
-        { once: true },
-      );
-      const poll = window.setInterval(() => {
-        if (window.twttr?.widgets) {
-          window.clearInterval(poll);
-          finish();
-        }
-      }, 120);
-      window.setTimeout(() => {
-        window.clearInterval(poll);
-        if (!window.twttr?.widgets) {
-          reject(new Error("Twitter widgets timeout"));
-        }
-      }, 10000);
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = WIDGETS_SRC;
-    script.async = true;
-    script.charset = "utf-8";
-    script.addEventListener("load", finish, { once: true });
-    script.addEventListener(
-      "error",
-      () => reject(new Error("Failed to load widgets.js")),
-      { once: true },
-    );
-    document.head.appendChild(script);
-  });
-}
-
-export function XTimeline() {
-  const mountRef = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState<"idle" | "loading" | "ready" | "error">(
-    "idle",
-  );
-
-  useEffect(() => {
-    const mount = mountRef.current;
-    if (!mount) return;
-
-    let cancelled = false;
-    let started = false;
-    let startTimer: number | undefined;
-    let mutations: MutationObserver | undefined;
-
-    const start = () => {
-      if (started || cancelled || !mountRef.current) return;
-      started = true;
-      setStatus("loading");
-
-      void loadTwitterWidgets()
-        .then((twttr) => {
-          if (cancelled || !mountRef.current) return undefined;
-          mountRef.current.replaceChildren();
-          return twttr.widgets.createTimeline(
-            { sourceType: "profile", screenName: SCREEN_NAME },
-            mountRef.current,
-            {
-              height: 520,
-              chrome: "nofooter transparent",
-              lang: "ja",
-              dnt: true,
-            },
-          );
-        })
-        .then((widget) => {
-          if (cancelled) return;
-          setStatus(widget ? "ready" : "error");
-        })
-        .catch(() => {
-          if (!cancelled) setStatus("error");
-        });
-    };
-
-    const afterSlideup = () => {
-      const parent = mount.closest(".view-slideup");
-      if (!parent || parent.classList.contains("on")) {
-        startTimer = window.setTimeout(start, 240);
-        return;
-      }
-      mutations = new MutationObserver(() => {
-        if (parent.classList.contains("on")) {
-          mutations?.disconnect();
-          startTimer = window.setTimeout(start, 240);
-        }
-      });
-      mutations.observe(parent, { attributes: true, attributeFilter: ["class"] });
-    };
-
-    const visibility = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        visibility.disconnect();
-        afterSlideup();
-      },
-      { threshold: 0.05, rootMargin: "160px 0px" },
-    );
-    visibility.observe(mount);
-
-    return () => {
-      cancelled = true;
-      visibility.disconnect();
-      mutations?.disconnect();
-      if (startTimer) window.clearTimeout(startTimer);
-      mount.replaceChildren();
-    };
-  }, []);
+  }
 
   return (
-    <div className="w-full">
-      {status !== "ready" ? (
-        <p className="mb-3 text-[12px] tracking-[0.08em] text-neutral-500">
-          {status === "error" ? (
-            <>
-              タイムラインを読み込めませんでした。
-              <a
-                className="ml-2 underline"
-                href={`https://x.com/${SCREEN_NAME}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                @{SCREEN_NAME} をXで見る
-              </a>
-            </>
-          ) : (
-            "タイムラインを読み込み中…"
-          )}
-        </p>
-      ) : null}
-      <div
-        ref={mountRef}
-        className="min-h-[520px] w-full overflow-hidden"
-        aria-label={`@${SCREEN_NAME} のXタイムライン`}
-      />
+    <div
+      className="max-h-[520px] overflow-y-auto border-t border-black/15"
+      aria-label={`@${X_SCREEN_NAME} のXタイムライン`}
+    >
+      {posts.map((post) => (
+        <article key={post.id} className="border-b border-black/15 py-4">
+          {post.reposted ? (
+            <p className="mb-2 pl-12 text-[11px] tracking-[0.08em] text-neutral-500">
+              @{X_SCREEN_NAME} がリポスト
+            </p>
+          ) : null}
+          <a
+            href={post.url}
+            target="_blank"
+            rel="noreferrer"
+            className="flex gap-3 text-inherit no-underline transition-opacity hover:opacity-70"
+          >
+            {post.authorAvatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={post.authorAvatar}
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-10 shrink-0 rounded-full object-cover"
+              />
+            ) : (
+              <span className="h-10 w-10 shrink-0 rounded-full bg-neutral-200" />
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="flex flex-wrap items-baseline gap-x-2 text-[13px] leading-snug">
+                <span className="font-medium tracking-[0.04em]">{post.authorName}</span>
+                <span className="ff-en text-[12px] text-neutral-500">
+                  @{post.authorHandle}
+                </span>
+                {post.createdLabel ? (
+                  <span className="ff-en text-[11px] text-neutral-400">
+                    {post.createdLabel}
+                  </span>
+                ) : null}
+              </p>
+              {post.text ? (
+                <p className="mt-1 whitespace-pre-wrap text-[13px] leading-[1.8] tracking-[0.04em]">
+                  {post.text}
+                </p>
+              ) : null}
+              {post.photos.length > 0 ? (
+                <div
+                  className={`mt-3 overflow-hidden ${
+                    post.photos.length > 1 ? "grid grid-cols-2 gap-1" : ""
+                  }`}
+                >
+                  {post.photos.map((src) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={src}
+                      src={src}
+                      alt=""
+                      className="h-40 w-full object-cover"
+                    />
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </a>
+        </article>
+      ))}
     </div>
   );
 }

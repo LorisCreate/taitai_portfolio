@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { HeroSlider } from "@/components/hero-slider";
 import { Reveal } from "@/components/reveal";
 import { TextLink } from "@/components/text-link";
@@ -187,7 +188,15 @@ export default function Home() {
                 <p className="ff-mi tracking-[0.16em]">エックス</p>
               </div>
               <div className="mt-8">
-                <XTimeline />
+                <Suspense
+                  fallback={
+                    <p className="text-[12px] tracking-[0.08em] text-neutral-500">
+                      タイムラインを読み込み中…
+                    </p>
+                  }
+                >
+                  <XTimeline />
+                </Suspense>
               </div>
               <div className="mt-8">
                 <TextLink href={site.x} external>
