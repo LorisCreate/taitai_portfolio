@@ -121,12 +121,12 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <Reveal as="section" id="photograph" className="mt-24 md:mt-36">
+        <Reveal as="section" id="animation" className="mt-24 md:mt-36">
           <h2 className="ff-mi text-[28px] tracking-[0.2em] md:text-[36px]">
-            写真を撮ります
+            Live2D作ります
           </h2>
           <p className="ff-en mt-1 text-[16px] tracking-[0.16em] md:text-[18px]">
-            photograph
+            animation
           </p>
           <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
             {photoImages.map((src, i) => (
@@ -136,7 +136,7 @@ export default function Home() {
               >
                 <Image
                   src={src}
-                  alt="撮影作品"
+                  alt="Live2D"
                   width={604}
                   height={604}
                   className="aspect-square h-auto w-full object-cover"
@@ -146,11 +146,9 @@ export default function Home() {
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <p>
-              フィルムカメラ、デジタルカメラを使って写真を撮っています。
+              Vtuberモデルなどに用いられるLive2Dを制作しています。
               <br className="hidden md:block" />
-              光の入ったあたたかな雰囲気の写真や、日常・旅先での四季を感じられるような写真が得意です。
-              <br className="hidden lg:block" />
-              観光地や宿泊施設のプロモーション、ご家族のケの日・ハレの日の撮影など、お気軽にご相談ください。
+              少しずつGalleryページに増やしていけるようにしたいと思いますのでぜひぜひ楽しんでいってもらえたらうれしいです。
             </p>
             <div className="text-right">
               <TextLink href="/gallery">view more</TextLink>
