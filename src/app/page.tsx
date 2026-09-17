@@ -57,13 +57,18 @@ export default function Home() {
               about
             </p>
             <p className="mt-10">
-              デザインと写真で、自分の大切な人やモノ、
-              <br className="hidden md:block" />
-              誰かにとっての大切な人やモノをより輝かせたい。
+              わくわくすること。ドキドキすること。
               <br />
-              いつまでもわくわくを忘れないおとなでありたい。
+              楽しいことや悲しさや切なさなど
             </p>
-            <p className="mt-4">好奇心旺盛、すなおでまじめなおとなです。</p>
+            <p className="my-5 text-[16px] tracking-[0.1em] md:text-[18px]">
+              「見ていたい！」
+            </p>
+            <p>
+              と感じられるものを創作し続けたい
+              <br />
+              そんなクリエイターを目指してます
+            </p>
             <div className="mt-6 text-right">
               <TextLink href="/profile">my profile</TextLink>
             </div>
