@@ -9,28 +9,22 @@ export function HeroSlider() {
   useEffect(() => {
     const id = window.setInterval(() => {
       setIndex((current) => (current + 1) % heroImages.length);
-    }, 4200);
+    }, 5000);
     return () => window.clearInterval(id);
   }, []);
 
   return (
-    <div className="relative w-full">
-      <div
-        className="hero-tai-mask relative w-full overflow-hidden"
-        role="img"
-        aria-label="TAI"
-      >
-        {heroImages.map((src, i) => (
-          <div
-            key={src}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1600ms] ease-out ${
-              i === index ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ backgroundImage: `url(${src})` }}
-          />
-        ))}
-      </div>
-      <p className="ff-en mt-3 text-[11px] tracking-[0.16em] text-black md:text-[13px] whitespace-pre-line">
+    <div className="relative h-[280px] w-full overflow-hidden md:h-[500px] lg:h-[700px]">
+      {heroImages.map((src, i) => (
+        <div
+          key={src}
+          className={`absolute inset-0 bg-cover bg-center ${
+            i === index ? "hero-slide-active" : "hero-slide-idle"
+          }`}
+          style={{ backgroundImage: `url(${src})`, zIndex: i === index ? 1 : 0 }}
+        />
+      ))}
+      <p className="ff-en absolute bottom-[-6px] left-0 z-10 text-[11px] tracking-[0.16em] text-black md:bottom-[-10px] md:text-[13px] whitespace-pre-line">
         {site.tagline}
       </p>
     </div>
