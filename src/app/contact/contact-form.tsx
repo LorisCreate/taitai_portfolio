@@ -57,7 +57,6 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div className="py-8">
-        <p className="ff-en text-[28px] tracking-[0.08em] md:text-[36px]">Thank you</p>
         <p className="mt-4 text-[13px] leading-[1.9]">
           お問い合わせを受け付けました。内容を確認し次第、担当者よりご連絡いたします。
         </p>
@@ -71,7 +70,7 @@ export function ContactForm() {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-9">
       <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="type" title="お問い合わせ種別" hint="Type" required />
+        <FieldLabel htmlFor="type" title="お問い合わせ種別" required />
         <select
           id="type"
           name="type"
@@ -91,7 +90,7 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="name" title="お名前" hint="Name" required />
+        <FieldLabel htmlFor="name" title="お名前" required />
         <input
           id="name"
           name="name"
@@ -114,12 +113,12 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="company" title="会社名" hint="Company Name" />
+        <FieldLabel htmlFor="company" title="会社名" />
         <input id="company" name="company" type="text" className={inputClass} />
       </div>
 
       <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="email" title="メールアドレス" hint="Mail" required />
+        <FieldLabel htmlFor="email" title="メールアドレス" required />
         <input
           id="email"
           name="email"
