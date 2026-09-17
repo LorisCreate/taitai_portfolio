@@ -32,9 +32,7 @@ export default async function GalleryWorkPage({ params }: Props) {
       <div className="page-hero">
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:items-end">
           <h1 className="ff-en text-[28px] tracking-[0.16em] md:text-[36px]">{work.title}</h1>
-          <p className="ff-en text-[14px] tracking-[0.16em]">
-            {work.tag === "web" ? "web site" : work.tag}
-          </p>
+          <p className="text-[14px] tracking-[0.16em]">{work.tag}</p>
         </div>
       </div>
 

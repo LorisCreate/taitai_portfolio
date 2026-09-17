@@ -97,10 +97,14 @@ export const instagramFeed = [
   "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
 ];
 
+export const galleryFilters = ["ALL", "オリジナル", "二次創作", "Live2D"] as const;
+
+export type GalleryTag = Exclude<(typeof galleryFilters)[number], "ALL">;
+
 export type GalleryWork = {
   slug: string;
   title: string;
-  tag: string;
+  tag: GalleryTag;
   date: string;
   image: string;
   images: string[];
@@ -111,7 +115,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "morning-table",
     title: "朝のテーブル",
-    tag: "food",
+    tag: "オリジナル",
     date: "2025.03",
     image:
       "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80",
@@ -125,7 +129,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "window-portrait",
     title: "窓辺の肖像",
-    tag: "portrait",
+    tag: "二次創作",
     date: "2025.01",
     image:
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80",
@@ -138,7 +142,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "forest-wedding",
     title: "森のウェディング",
-    tag: "wedding",
+    tag: "オリジナル",
     date: "2024.10",
     image:
       "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80",
@@ -151,7 +155,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "architecture-light",
     title: "建築と光",
-    tag: "architecture",
+    tag: "オリジナル",
     date: "2024.08",
     image:
       "https://images.unsplash.com/photo-1487958449943-2429e8be8627?auto=format&fit=crop&w=1400&q=80",
@@ -164,7 +168,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "flower-and-shadow",
     title: "花と影",
-    tag: "still",
+    tag: "二次創作",
     date: "2024.05",
     image:
       "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1400&q=80",
@@ -177,7 +181,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "afternoon-away",
     title: "旅先の午後",
-    tag: "life",
+    tag: "二次創作",
     date: "2024.03",
     image:
       "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80",
@@ -190,7 +194,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "studio-portrait",
     title: "スタジオポートレート",
-    tag: "portrait",
+    tag: "Live2D",
     date: "2023.11",
     image:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1400&q=80",
@@ -203,7 +207,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "night-dining",
     title: "夜のダイニング",
-    tag: "food",
+    tag: "Live2D",
     date: "2023.09",
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80",
@@ -216,7 +220,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "paper-and-type",
     title: "紙と文字",
-    tag: "graphic",
+    tag: "オリジナル",
     date: "2023.06",
     image:
       "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1400&q=80",
@@ -229,7 +233,7 @@ export const galleryWorks: GalleryWork[] = [
   {
     slug: "site-for-atelier",
     title: "アトリエのサイト",
-    tag: "web",
+    tag: "Live2D",
     date: "2023.04",
     image:
       "https://images.unsplash.com/photo-1499750310107-5fef28a37e15?auto=format&fit=crop&w=1400&q=80",
@@ -241,17 +245,7 @@ export const galleryWorks: GalleryWork[] = [
   },
 ];
 
-export const galleryCategories = [
-  "all",
-  "food",
-  "portrait",
-  "wedding",
-  "architecture",
-  "still",
-  "life",
-  "graphic",
-  "web",
-] as const;
+export const galleryCategories = galleryFilters;
 
 export function getGalleryWork(slug: string) {
   return galleryWorks.find((work) => work.slug === slug);
