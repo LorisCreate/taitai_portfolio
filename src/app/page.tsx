@@ -84,12 +84,12 @@ export default function Home() {
           </figure>
         </Reveal>
 
-        <Reveal as="section" id="design" className="mt-24 md:mt-36">
+        <Reveal as="section" id="illustration" className="mt-24 md:mt-36">
           <h2 className="ff-mi text-[28px] tracking-[0.2em] md:text-[36px]">
-            デザインしてます
+            イラスト描いています
           </h2>
           <p className="ff-en mt-1 text-[16px] tracking-[0.16em] md:text-[18px]">
-            design
+            illustration
           </p>
           <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
             {designImages.map((src, i) => (
@@ -99,7 +99,7 @@ export default function Home() {
               >
                 <Image
                   src={src}
-                  alt="デザインの仕事"
+                  alt="イラスト"
                   width={604}
                   height={604}
                   className="aspect-square h-auto w-full object-cover"
@@ -109,11 +109,11 @@ export default function Home() {
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <p>
-              大好きな “ ものづくり ” を仕事にして13年目。
+              本格的にイラストを再開し約3年。オリジナル中心にして今は二次創作なども描いて楽しく活動をさせていただいております。
               <br className="hidden md:block" />
-              ディレクションからデザイン、コーディングまでワンストップで担当できる
+              手にしてくれた方が楽しんでもらえる、企業様が求めるものをできるようにお仕事をしていくという気持ちを第一に活動しております。
               <br className="hidden md:block" />
-              WEBサイト制作をメインに、デザインにかかわる様々なお仕事を承っております。
+              挿し絵、表紙などイラストに関わる様々なお仕事を承っております。
             </p>
             <div className="text-right">
               <TextLink href="/gallery">view more</TextLink>
