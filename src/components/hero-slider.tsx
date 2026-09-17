@@ -1,7 +1,13 @@
 "use client";
 
+import { Fredoka } from "next/font/google";
 import { useEffect, useState } from "react";
 import { heroImages, site } from "@/lib/site";
+
+const rounded = Fredoka({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 export function HeroSlider() {
   const [index, setIndex] = useState(0);
@@ -14,17 +20,52 @@ export function HeroSlider() {
   }, []);
 
   return (
-    <div className="relative h-[280px] w-full overflow-hidden md:h-[500px] lg:h-[700px]">
-      {heroImages.map((src, i) => (
-        <div
-          key={src}
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1600ms] ease-out ${
-            i === index ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ backgroundImage: `url(${src})` }}
-        />
-      ))}
-      <p className="ff-en absolute bottom-[-6px] left-0 text-[11px] tracking-[0.16em] text-black md:bottom-[-10px] md:text-[13px] whitespace-pre-line">
+    <div className="relative w-full">
+      <svg
+        viewBox="0 0 1200 620"
+        className={`${rounded.className} h-auto w-full overflow-visible`}
+        role="img"
+        aria-label="TAI"
+      >
+        <defs>
+          <mask id="hero-tai-mask" maskUnits="userSpaceOnUse">
+            <rect width="1200" height="620" fill="black" />
+            <text
+              x="600"
+              y="338"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fill="#fff"
+              stroke="#fff"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              paintOrder="stroke fill"
+              style={{
+                fontFamily: rounded.style.fontFamily,
+                fontWeight: 700,
+                fontSize: 460,
+                letterSpacing: "-0.07em",
+                strokeWidth: 36,
+              }}
+            >
+              TAI
+            </text>
+          </mask>
+        </defs>
+        {heroImages.map((src, i) => (
+          <image
+            key={src}
+            href={src}
+            width="1200"
+            height="620"
+            preserveAspectRatio="xMidYMid slice"
+            mask="url(#hero-tai-mask)"
+            className="origin-center transition-opacity duration-[1600ms] ease-out"
+            style={{ opacity: i === index ? 1 : 0 }}
+          />
+        ))}
+      </svg>
+      <p className="ff-en mt-3 text-[11px] tracking-[0.16em] text-black md:text-[13px] whitespace-pre-line">
         {site.tagline}
       </p>
     </div>
