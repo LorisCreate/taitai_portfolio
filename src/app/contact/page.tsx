@@ -1,14 +1,14 @@
 import { ContactForm } from "./contact-form";
 
 export const metadata = {
-  title: "お問い合わせ｜たいたい",
+  title: "Contact｜たいたい",
 };
 
 export default function ContactPage() {
   return (
     <main className="mx-auto max-w-[1200px] px-6 pb-28 md:px-8">
-      <h1 className="ff-mi pt-6 text-[40px] leading-none tracking-[0.18em] md:pt-10 md:text-[64px] lg:text-[80px]">
-        お問い合わせ
+      <h1 className="ff-en pt-6 text-[64px] leading-none tracking-[0.04em] md:pt-10 md:text-[120px] lg:text-[160px]">
+        Contact
       </h1>
 
       <section className="mt-12 flex flex-col gap-14 md:mt-20 md:flex-row md:justify-between md:gap-16 lg:gap-24">
