@@ -12,7 +12,8 @@ type Props = {
 export function Reveal({ children, className = "", id, as = "div" }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
-  const classes = `view-slideup${visible ? " on" : ""} ${className}`.trim();
+  const classes =
+    `view-slideup${visible ? " on" : ""} ${as === "section" ? "section-veil" : ""} ${className}`.trim();
   const bind = (node: HTMLElement | null) => {
     ref.current = node;
   };

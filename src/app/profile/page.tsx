@@ -25,7 +25,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      <section className="mt-16 grid items-start gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-20">
+      <section className="section-veil mt-16 grid items-start gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-20">
         <figure>
           <Image
             src={aboutPortrait}

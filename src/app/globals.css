@@ -15,6 +15,7 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
@@ -70,6 +71,36 @@ body {
   max-width: 1200px;
   padding: 56px 24px;
   text-align: center;
+}
+
+.section-veil {
+  position: relative;
+}
+
+.section-veil::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.42) 34%,
+    rgba(255, 255, 255, 0.88) 50%,
+    rgba(255, 255, 255, 0.42) 66%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  content: "";
+  height: 7.5rem;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translate(-50%, -52%);
+  width: 100vw;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .section-veil::before {
+    height: 11rem;
+  }
 }
 
 .hero-slide-idle {
