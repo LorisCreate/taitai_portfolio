@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ja"
       className={`${jost.variable} ${notoSans.variable} ${mincho.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-white text-black">
+      <body className="min-h-full text-black">
         <SiteHeader />
         <div className="pt-[72px] md:pt-[88px] lg:pt-[100px]">{children}</div>
         <SiteFooter />

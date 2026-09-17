@@ -23,7 +23,7 @@ export default function Home() {
         <HeroSlider />
 
         <section className="relative z-10 mt-12 flex justify-end md:-mt-12">
-          <Reveal className="w-full bg-white px-6 py-8 md:w-[42%] md:px-9 md:py-8">
+          <Reveal className="bg-washi w-full px-6 py-8 md:w-[42%] md:px-9 md:py-8">
             <div className="flex items-center justify-between">
               <h2 className="ff-en text-[15px] tracking-[0.14em]">what’s new</h2>
               <TextLink href="/event">all view</TextLink>
@@ -240,7 +240,7 @@ export default function Home() {
         </Reveal>
       </div>
 
-      <Reveal as="section" id="contact" className="mt-28 bg-[#f3f3f3] md:mt-40">
+      <Reveal as="section" id="contact" className="mt-28 md:mt-40">
         <div className="mx-auto max-w-[1200px] px-6 py-16 text-center md:px-8 md:py-20">
           <h2 className="ff-en text-[48px] leading-none tracking-[0.18em] md:text-[64px]">
             contact

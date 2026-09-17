@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #dceef6;
   --foreground: #000000;
+  --washi-image: url("/washi-blue.jpg");
 }
 
 @theme inline {
@@ -17,8 +18,17 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body,
+.bg-washi {
+  background-color: #dceef6;
+  background-image: var(--washi-image);
+  background-repeat: repeat;
+  background-size: 420px 420px;
+  background-attachment: fixed;
+}
+
 body {
-  background: #fff;
   color: #000;
   font-family: var(--font-sans-jp), "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   font-size: 13px;

@@ -48,7 +48,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 bg-white">
+      <header className="bg-washi fixed inset-x-0 top-0 z-50">
         <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6 md:h-[88px] md:px-8 lg:h-[100px]">
           <Link
             href="/"
@@ -130,7 +130,7 @@ export function SiteHeader() {
       </header>
 
       {open ? (
-        <div className="fixed inset-0 z-40 bg-white pt-[72px] lg:hidden">
+        <div className="bg-washi fixed inset-0 z-40 pt-[72px] lg:hidden">
           <nav className="flex h-full flex-col items-center px-8 pt-10 text-center">
             <ul className="space-y-6">
               {navItems.map((item) => (
