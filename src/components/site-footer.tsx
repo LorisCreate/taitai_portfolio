@@ -23,7 +23,20 @@ export function SiteFooter() {
           <p className="ff-en">
             Copyright © {site.person}, All rights reserved.
           </p>
-          <p className="ff-en hidden md:block">instagram　/　x</p>
+          <p className="ff-en hidden md:block">
+            <a
+              href={site.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:opacity-55"
+            >
+              instagram
+            </a>
+            　/　
+            <a href={site.x} target="_blank" rel="noreferrer" className="hover:opacity-55">
+              x
+            </a>
+          </p>
         </div>
       </div>
     </footer>

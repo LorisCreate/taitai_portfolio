@@ -3,8 +3,8 @@ export const site = {
   person: "たいたい",
   role: "PHOTOGRAPHER",
   tagline: "web design, graphic design, photograph,\ntravel, column, wakuwaku and more..",
-  instagram: "https://www.instagram.com/",
-  x: "https://x.com/",
+  instagram: "https://www.instagram.com/taitai_illust/?hl=ja",
+  x: "https://x.com/taitai_pon",
 };
 
 /** Set to true to show the homepage my works pickup again. */
