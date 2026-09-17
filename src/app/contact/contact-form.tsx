@@ -6,30 +6,27 @@ type Status = "idle" | "sending" | "success" | "error";
 
 function FieldLabel({
   htmlFor,
-  title,
-  hint,
+  en,
+  ja,
   required,
 }: {
   htmlFor: string;
-  title: string;
-  hint?: string;
-  required?: boolean;
+  en: string;
+  ja: string;
+  required: boolean;
 }) {
   return (
-    <label htmlFor={htmlFor} className="flex flex-col gap-0.5">
-      <span className="text-[15px] tracking-[0.08em]">
-        {title}
-        {required ? <span className="ml-1 text-[12px] text-[#cf0000]">*</span> : null}
-      </span>
-      {hint ? (
-        <span className="ff-en text-[11px] tracking-[0.12em] text-black/50">{hint}</span>
-      ) : null}
+    <label htmlFor={htmlFor} className="flex items-baseline gap-1">
+      <span className="text-[15px] tracking-[0.05em] md:text-[16px]">{en}</span>
+      <span className="text-[13px]">/</span>
+      <span className="text-[12px] tracking-[0.05em] text-black/60">{ja}</span>
+      {required ? <span className="text-[12px] text-[#cf0000]">*</span> : null}
     </label>
   );
 }
 
 const inputClass =
-  "w-full border-0 border-b border-black bg-transparent px-0 py-3 text-[14px] tracking-[0.06em] outline-none placeholder:text-black/30";
+  "w-full border-0 border-b border-black bg-transparent px-2 py-4 text-[13px] tracking-[0.05em] outline-none placeholder:text-black/35";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -57,29 +54,34 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div className="py-8">
+        <p className="ff-en text-[28px] tracking-[0.08em] md:text-[36px]">Thank you</p>
         <p className="mt-4 text-[13px] leading-[1.9]">
           お問い合わせを受け付けました。内容を確認し次第、担当者よりご連絡いたします。
         </p>
-        <button type="button" className="contact-submit mt-10" onClick={() => setStatus("idle")}>
-          送信
+        <button
+          type="button"
+          className="mt-10 flex h-10 items-center justify-center rounded-full border border-black px-8 text-[14px] tracking-[0.05em]"
+          onClick={() => setStatus("idle")}
+        >
+          Send another
         </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-9">
-      <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="type" title="お問い合わせ種別" required />
+    <form onSubmit={onSubmit} className="flex flex-col gap-10">
+      <div className="flex flex-col gap-1.5">
+        <FieldLabel htmlFor="type" en="Type" ja="お問い合わせ種別" required />
         <select
           id="type"
           name="type"
           required
           defaultValue=""
-          className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" fill="none"><path stroke="%23000" d="M1 1.5 6 6.5 11 1.5"/></svg>')] bg-[length:12px_8px] bg-[right_0_center] bg-no-repeat pr-6`}
+          className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" fill="none"><path stroke="%23000" d="M1 1.5 6 6.5 11 1.5"/></svg>')] bg-[length:12px_8px] bg-[right_8px_center] bg-no-repeat pr-8`}
         >
           <option value="" hidden>
-            選択してください
+            お問い合わせ種別を選択してください。
           </option>
           <option value="お仕事依頼">お仕事依頼</option>
           <option value="展示会のご案内">展示会のご案内</option>
@@ -89,54 +91,50 @@ export function ContactForm() {
         </select>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="name" title="お名前" required />
+      <div className="flex flex-col gap-1.5">
+        <FieldLabel htmlFor="name" en="Name" ja="お名前" required />
         <input
           id="name"
           name="name"
           type="text"
           required
-          placeholder="田中 太郎"
+          placeholder="お名前を入力してください。"
           className={inputClass}
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="kana" title="送り仮名" hint="ナマエ" />
+      <div className="flex flex-col gap-1.5">
+        <FieldLabel htmlFor="company" en="Company name" ja="会社 組織名" required={false} />
         <input
-          id="kana"
-          name="kana"
+          id="company"
+          name="company"
           type="text"
-          placeholder="タナカ タロウ"
+          placeholder="所属する会社もしくは組織の名称を入力してください。"
           className={inputClass}
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="company" title="会社名" />
-        <input id="company" name="company" type="text" className={inputClass} />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="email" title="メールアドレス" required />
+      <div className="flex flex-col gap-1.5">
+        <FieldLabel htmlFor="email" en="Mail Address" ja="メールアドレス" required />
         <input
           id="email"
           name="email"
           type="email"
           required
-          placeholder="xxxcccvvv@aaamail.com"
+          placeholder="メールアドレスを入力してください。"
           className={inputClass}
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <FieldLabel htmlFor="message" title="お問い合わせ内容" required />
+      <div className="flex flex-col gap-1.5">
+        <FieldLabel htmlFor="message" en="Message" ja="お問い合わせ内容" required />
         <textarea
           id="message"
           name="message"
           required
-          rows={7}
-          className={`${inputClass} min-h-[10rem] resize-y border border-black px-3 py-3`}
+          placeholder="お問い合わせ内容をご記入ください。"
+          rows={6}
+          className={`${inputClass} min-h-[8.5rem] resize-y`}
         />
       </div>
 
@@ -144,8 +142,29 @@ export function ContactForm() {
         <p className="text-[13px]">必須項目をご入力ください。</p>
       ) : null}
 
-      <button type="submit" disabled={status === "sending"} className="contact-submit mt-2">
-        {status === "sending" ? "送信中" : "送信"}
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="mx-auto mt-2 flex h-10 items-center justify-center gap-2 rounded-full border border-black px-8 text-[14px] tracking-[0.05em] disabled:opacity-50"
+        aria-label="Submit"
+      >
+        {status === "sending" ? (
+          "Sending..."
+        ) : (
+          <>
+            Send Message
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="8"
+              fill="none"
+              viewBox="0 0 20 8"
+              aria-hidden="true"
+            >
+              <path stroke="currentColor" d="M.5 4h18m0 0L15.247.5M18.5 4l-3.253 3.5" />
+            </svg>
+          </>
+        )}
       </button>
     </form>
   );
