@@ -61,7 +61,7 @@ export default function Home() {
               <br />
               楽しいことや悲しさや切なさなど
             </p>
-            <p className="my-5 text-[16px] tracking-[0.1em] md:text-[18px]">
+            <p className="my-3 text-[16px] tracking-[0.1em] md:text-[18px]">
               「見ていたい！」
             </p>
             <p>
