@@ -20,10 +20,10 @@ import {
 export default function Home() {
   return (
     <main>
-      <div className="mx-auto max-w-[1200px] px-6 md:px-8">
-        <HeroSlider />
+      <HeroSlider />
 
-        <section className="relative z-10 mt-12 flex justify-end md:-mt-12">
+      <div className="mx-auto max-w-[1200px] px-6 md:px-8">
+        <section className="relative z-10 mt-8 flex justify-end md:-mt-28">
           <Reveal className="bg-washi w-full px-6 py-8 md:w-[42%] md:px-9 md:py-8">
             <div className="flex items-center justify-between">
               <h2 className="ff-en text-[15px] tracking-[0.14em]">what’s new</h2>

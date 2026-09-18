@@ -14,19 +14,25 @@ export function HeroSlider() {
   }, []);
 
   return (
-    <div className="relative h-[280px] w-full overflow-hidden md:h-[500px] lg:h-[700px]">
-      {heroImages.map((src, i) => (
-        <div
-          key={src}
-          className={`absolute inset-0 bg-cover bg-center ${
-            i === index ? "hero-slide-active" : "hero-slide-idle"
-          }`}
-          style={{ backgroundImage: `url(${src})`, zIndex: i === index ? 1 : 0 }}
-        />
-      ))}
-      <p className="ff-en absolute bottom-[-6px] left-0 z-10 text-[11px] tracking-[0.16em] text-black md:bottom-[-10px] md:text-[13px] whitespace-pre-line">
-        {site.tagline}
-      </p>
-    </div>
+    <section className="hero-fv" aria-label="メインビジュアル">
+      <div className="hero-fv__gutter" aria-hidden="true">
+        <span className="hero-fv__mark ff-mi">{site.person}</span>
+      </div>
+
+      <div className="hero-fv__frame">
+        {heroImages.map((src, i) => (
+          <div
+            key={src}
+            className={`hero-fv__slide ${
+              i === index ? "hero-slide-active" : "hero-slide-idle"
+            }`}
+            style={{ backgroundImage: `url(${src})`, zIndex: i === index ? 1 : 0 }}
+          />
+        ))}
+        <div className="hero-fv__veil" />
+      </div>
+
+      <p className="hero-fv__tagline ff-en">{site.tagline}</p>
+    </section>
   );
 }

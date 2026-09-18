@@ -122,6 +122,96 @@ body {
   }
 }
 
+.hero-fv {
+  height: 100svh;
+  margin-top: -72px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-fv::after {
+  background-color: rgba(255, 255, 255, 0.3);
+  content: "";
+  height: 100%;
+  left: 0;
+  max-width: 50rem;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 58%;
+  z-index: 1;
+}
+
+.hero-fv__gutter {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  min-width: 2.75rem;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 11%;
+  z-index: 3;
+}
+
+.hero-fv__mark {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+}
+
+.hero-fv__frame {
+  bottom: 3.25rem;
+  left: 2.75rem;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 4.6rem;
+  z-index: 2;
+}
+
+.hero-fv__slide {
+  background-position: center;
+  background-size: cover;
+  inset: 0;
+  position: absolute;
+}
+
+.hero-fv__veil {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(220, 238, 246, 0.62) 0%,
+      rgba(220, 238, 246, 0.18) 16%,
+      rgba(220, 238, 246, 0) 38%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(220, 238, 246, 0.22) 0%,
+      rgba(220, 238, 246, 0) 16%,
+      rgba(220, 238, 246, 0) 76%,
+      rgba(220, 238, 246, 0.42) 100%
+    );
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.hero-fv__tagline {
+  bottom: 0.7rem;
+  font-size: 11px;
+  left: 2.75rem;
+  letter-spacing: 0.16em;
+  position: absolute;
+  white-space: pre-line;
+  z-index: 4;
+}
+
 .hero-slide-idle {
   opacity: 0;
   transition: opacity 2000ms ease;
@@ -131,6 +221,39 @@ body {
   animation: hero-wipe 2000ms ease-out;
   opacity: 1;
   transition: opacity 2000ms ease;
+}
+
+@media (min-width: 768px) {
+  .hero-fv {
+    margin-top: -88px;
+  }
+
+  .hero-fv__frame {
+    bottom: 5.5rem;
+    left: 12%;
+    top: 6.5rem;
+  }
+
+  .hero-fv__tagline {
+    bottom: 1.4rem;
+    font-size: 13px;
+    left: 12%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-fv {
+    margin-top: -100px;
+  }
+
+  .hero-fv__frame {
+    bottom: 6.5rem;
+    top: 7.25rem;
+  }
+
+  .hero-fv__mark {
+    font-size: 12px;
+  }
 }
 
 @keyframes hero-wipe {

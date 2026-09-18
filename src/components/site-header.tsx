@@ -38,6 +38,8 @@ function XIcon({ className }: { className?: string }) {
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const isHome = pathname === "/";
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -46,9 +48,21 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
-      <header className="bg-washi fixed inset-x-0 top-0 z-50">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 ${
+          open || !isHome || scrolled ? "bg-washi" : "bg-transparent"
+        }`}
+      >
         <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6 md:h-[88px] md:px-8 lg:h-[100px]">
           <Link
             href="/"
