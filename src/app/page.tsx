@@ -184,7 +184,13 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-            <p />
+            <p>
+              まだまだ未熟ですが漫画も描いてます。
+              <br />
+              色々悩みながら進もうとしてたら知識つけなければとなってしまい頭でっかちになってしまったけど、少しずつ描いています。
+              <br />
+              もしよかったら読んでいってもらえたら嬉しいです。
+            </p>
             <div className="text-right">
               <TextLink href="/gallery">view more</TextLink>
             </div>
