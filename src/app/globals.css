@@ -73,26 +73,6 @@ body {
   text-align: center;
 }
 
-.sub-bg {
-  background-color: #fff;
-  margin: 12px 12px 40px;
-  min-height: calc(100svh - 72px - 52px);
-}
-
-@media (min-width: 768px) {
-  .sub-bg {
-    margin: 16px 20px 56px;
-    min-height: calc(100svh - 88px - 72px);
-  }
-}
-
-@media (min-width: 1024px) {
-  .sub-bg {
-    margin: 20px 28px 64px;
-    min-height: calc(100svh - 100px - 84px);
-  }
-}
-
 .gallery-filter {
   background: #fff;
   border: 1px solid #f78a05;

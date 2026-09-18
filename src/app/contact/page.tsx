@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="sub-bg">
+    <main className="bg-washi">
       <div className="mx-auto max-w-[1200px] px-6 pb-28 md:px-8">
       <h1 className="ff-en pt-6 text-[64px] leading-none tracking-[0.04em] md:pt-10 md:text-[120px] lg:text-[160px]">
         Contact

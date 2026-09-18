@@ -17,7 +17,7 @@ const timeline = [
 
 export default function ProfilePage() {
   return (
-    <main className="sub-bg">
+    <main className="bg-washi">
       <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
       <div className="page-hero">
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:items-end">
