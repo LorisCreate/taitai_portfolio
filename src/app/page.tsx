@@ -10,6 +10,7 @@ import {
   aboutPortrait,
   designImages,
   instagramFeed,
+  mangaImages,
   news,
   photoImages,
   showMyWorks,
@@ -153,6 +154,37 @@ export default function Home() {
               <br className="hidden md:block" />
               少しずつGalleryページに増やしていけるようにしたいと思いますのでぜひぜひ楽しんでいってもらえたらうれしいです。
             </p>
+            <div className="text-right">
+              <TextLink href="/gallery">view more</TextLink>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal as="section" id="manga" className="mt-24 md:mt-36">
+          <h2 className="ff-mi text-[28px] tracking-[0.2em] md:text-[36px]">
+            漫画
+          </h2>
+          <p className="ff-en mt-1 text-[16px] tracking-[0.16em] md:text-[18px]">
+            manga
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
+            {mangaImages.map((src, i) => (
+              <figure
+                key={src}
+                className={i === 1 ? "hidden md:block" : undefined}
+              >
+                <Image
+                  src={src}
+                  alt="漫画"
+                  width={604}
+                  height={604}
+                  className="aspect-square h-auto w-full object-cover"
+                />
+              </figure>
+            ))}
+          </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+            <p />
             <div className="text-right">
               <TextLink href="/gallery">view more</TextLink>
             </div>
