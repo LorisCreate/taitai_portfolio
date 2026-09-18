@@ -17,7 +17,7 @@ export default function EventPage() {
       {events.length === 0 ? (
         <p className="mt-16 text-center">現在公開中のイベントはありません。</p>
       ) : (
-        <ul className="section-veil mt-16 divide-y divide-black/20 border-y border-black/20">
+        <ul className="mt-16 divide-y divide-black/20 border-y border-black/20">
           {events.map((event) => (
             <li key={event.title} className="grid gap-3 py-8 md:grid-cols-[220px_1fr] md:gap-10">
               <div>

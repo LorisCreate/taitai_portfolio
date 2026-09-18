@@ -29,7 +29,6 @@ export function HeroSlider() {
             style={{ backgroundImage: `url(${src})`, zIndex: i === index ? 1 : 0 }}
           />
         ))}
-        <div className="hero-fv__veil" />
       </div>
 
       <p className="hero-fv__tagline ff-en">{site.tagline}</p>

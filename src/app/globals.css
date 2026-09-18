@@ -73,10 +73,6 @@ body {
   text-align: center;
 }
 
-.section-veil {
-  position: relative;
-}
-
 .gallery-filter {
   background: #fff;
   border: 1px solid #f78a05;
@@ -94,32 +90,6 @@ body {
   background: #f78a05;
   border-color: #f78a05;
   color: #fff;
-}
-
-.section-veil::before {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.42) 34%,
-    rgba(255, 255, 255, 0.88) 50%,
-    rgba(255, 255, 255, 0.42) 66%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  content: "";
-  height: 7.5rem;
-  left: 50%;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  transform: translate(-50%, -52%);
-  width: 100vw;
-  z-index: 0;
-}
-
-@media (min-width: 768px) {
-  .section-veil::before {
-    height: 11rem;
-  }
 }
 
 .hero-fv {
@@ -179,27 +149,6 @@ body {
   background-size: cover;
   inset: 0;
   position: absolute;
-}
-
-.hero-fv__veil {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(220, 238, 246, 0.62) 0%,
-      rgba(220, 238, 246, 0.18) 16%,
-      rgba(220, 238, 246, 0) 38%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(220, 238, 246, 0.22) 0%,
-      rgba(220, 238, 246, 0) 16%,
-      rgba(220, 238, 246, 0) 76%,
-      rgba(220, 238, 246, 0.42) 100%
-    );
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 2;
 }
 
 .hero-fv__tagline {
