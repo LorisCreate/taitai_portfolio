@@ -6,7 +6,8 @@ export const metadata = {
 
 export default function EventPage() {
   return (
-    <main className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
+    <main className="sub-bg">
+      <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
       <div className="page-hero">
         <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:items-end">
           <h1 className="ff-mi text-[32px] tracking-[0.28em] md:text-[42px]">お知らせ</h1>
@@ -32,6 +33,7 @@ export default function EventPage() {
           ))}
         </ul>
       )}
+      </div>
     </main>
   );
 }
