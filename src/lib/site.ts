@@ -5,6 +5,7 @@ export const site = {
   tagline: "web design, graphic design, photograph,\ntravel, column, wakuwaku and more..",
   instagram: "https://www.instagram.com/taitai_illust/?hl=ja",
   x: "https://x.com/taitai_pon",
+  pixiv: "https://www.pixiv.net/users/37033465",
 };
 
 /** Set to true to show the homepage my works pickup again. */

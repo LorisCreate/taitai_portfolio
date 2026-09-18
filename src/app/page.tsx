@@ -192,7 +192,9 @@ export default function Home() {
               もしよかったら読んでいってもらえたら嬉しいです。
             </p>
             <div className="text-right">
-              <TextLink href="/gallery">view more</TextLink>
+              <TextLink href={site.pixiv} external en={false}>
+                pixivで読む
+              </TextLink>
             </div>
           </div>
         </Reveal>
