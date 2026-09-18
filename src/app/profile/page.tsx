@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PageTitle } from "@/components/page-title";
 import { TextLink } from "@/components/text-link";
 import { aboutPortrait } from "@/lib/site";
 
@@ -19,12 +20,7 @@ export default function ProfilePage() {
   return (
     <main className="bg-washi">
       <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
-      <div className="page-hero">
-        <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:items-end">
-          <h1 className="ff-mi text-[32px] tracking-[0.28em] md:text-[42px]">わたしのこと</h1>
-          <p className="ff-en text-[14px] tracking-[0.16em]">profile</p>
-        </div>
-      </div>
+      <PageTitle en="profile" ja="わたしのこと" />
 
       <section className="mt-16 grid items-start gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-20">
         <figure>

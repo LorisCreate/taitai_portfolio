@@ -1,3 +1,4 @@
+import { PageTitle } from "@/components/page-title";
 import { events } from "@/lib/site";
 
 export const metadata = {
@@ -8,12 +9,7 @@ export default function EventPage() {
   return (
     <main className="bg-washi">
       <div className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
-      <div className="page-hero">
-        <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:items-end">
-          <h1 className="ff-mi text-[32px] tracking-[0.28em] md:text-[42px]">お知らせ</h1>
-          <p className="ff-en text-[14px] tracking-[0.16em]">event</p>
-        </div>
-      </div>
+      <PageTitle en="event" ja="お知らせ" />
 
       {events.length === 0 ? (
         <p className="mt-16 text-center">現在公開中のイベントはありません。</p>

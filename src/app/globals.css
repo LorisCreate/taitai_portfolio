@@ -73,6 +73,69 @@ body {
   text-align: center;
 }
 
+.page-title {
+  margin-bottom: 2.5rem;
+  padding-top: 0.5rem;
+}
+
+.page-title__ttl {
+  padding-top: 1.8rem;
+  position: relative;
+  text-align: center;
+}
+
+.page-title__ttl::before {
+  background-color: #000;
+  border-radius: 1px;
+  content: "";
+  height: 4.5px;
+  left: 50%;
+  margin-left: -23px;
+  position: absolute;
+  top: 0;
+  width: 46px;
+}
+
+.page-title__en {
+  display: block;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+}
+
+.page-title__ja {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    margin-bottom: 4.5rem;
+    padding-top: 1rem;
+  }
+
+  .page-title__ttl {
+    padding-top: 2.3rem;
+  }
+
+  .page-title__ttl::before {
+    border-radius: 2px;
+    height: 5px;
+  }
+
+  .page-title__en {
+    font-size: 43px;
+  }
+
+  .page-title__ja {
+    font-size: 12px;
+  }
+}
+
 .gallery-filter {
   background: #fff;
   border: 1px solid #f78a05;

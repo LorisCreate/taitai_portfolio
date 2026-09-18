@@ -1,3 +1,4 @@
+import { PageTitle } from "@/components/page-title";
 import { ContactForm } from "./contact-form";
 
 export const metadata = {
@@ -8,9 +9,7 @@ export default function ContactPage() {
   return (
     <main className="bg-washi">
       <div className="mx-auto max-w-[1200px] px-6 pb-28 md:px-8">
-      <h1 className="ff-en pt-6 text-[64px] leading-none tracking-[0.04em] md:pt-10 md:text-[120px] lg:text-[160px]">
-        Contact
-      </h1>
+      <PageTitle en="contact" ja="お問い合わせ" />
 
       <section className="mt-12 flex flex-col gap-14 md:mt-20 md:flex-row md:justify-between md:gap-16 lg:gap-24">
         <div className="max-w-[380px]">
