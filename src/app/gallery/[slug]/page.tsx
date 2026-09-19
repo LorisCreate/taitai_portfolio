@@ -32,7 +32,7 @@ export default async function GalleryWorkPage({ params }: Props) {
     <main className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
       <PageTitle en={work.slug.replaceAll("-", " ")} ja={work.title} />
 
-      <p className="ff-en mt-10 text-[13px] tracking-[0.14em]">{work.date}</p>
+      <p className="ff-en mt-8 text-[16px] leading-8 tracking-[0.14em]">{work.date}</p>
       <p className="mt-6 max-w-2xl">{work.body}</p>
 
       <div className="mt-12 space-y-8">

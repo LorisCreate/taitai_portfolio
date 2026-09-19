@@ -16,17 +16,17 @@ function FieldLabel({
   required: boolean;
 }) {
   return (
-    <label htmlFor={htmlFor} className="flex items-baseline gap-1">
-      <span className="text-[15px] tracking-[0.05em] md:text-[16px]">{en}</span>
-      <span className="text-[13px]">/</span>
-      <span className="text-[12px] tracking-[0.05em] text-black/60">{ja}</span>
-      {required ? <span className="text-[12px] text-[#cf0000]">*</span> : null}
+    <label htmlFor={htmlFor} className="flex items-baseline gap-2">
+      <span className="text-[16px] leading-8 tracking-[0.05em]">{en}</span>
+      <span className="text-[16px] leading-8">/</span>
+      <span className="text-[16px] leading-8 tracking-[0.05em] text-black/60">{ja}</span>
+      {required ? <span className="text-[16px] leading-8 text-[#cf0000]">*</span> : null}
     </label>
   );
 }
 
 const inputClass =
-  "w-full border-0 border-b border-black bg-transparent px-2 py-4 text-[13px] tracking-[0.05em] outline-none placeholder:text-black/35";
+  "w-full border-0 border-b border-black bg-transparent px-2 py-4 text-[16px] leading-8 tracking-[0.05em] outline-none placeholder:text-black/35";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -54,13 +54,13 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div className="py-8">
-        <p className="ff-en text-[28px] tracking-[0.08em] md:text-[36px]">Thank you</p>
-        <p className="mt-4 text-[13px] leading-[1.9]">
+        <p className="ff-en text-[32px] leading-8 tracking-[0.08em] md:text-[40px] md:leading-10">Thank you</p>
+        <p className="mt-4 text-[16px] leading-8">
           お問い合わせを受け付けました。内容を確認し次第、担当者よりご連絡いたします。
         </p>
         <button
           type="button"
-          className="mt-10 flex h-10 items-center justify-center rounded-full border border-black px-8 text-[14px] tracking-[0.05em]"
+          className="mt-8 flex h-10 items-center justify-center rounded-full border border-black px-8 text-[16px] leading-8 tracking-[0.05em]"
           onClick={() => setStatus("idle")}
         >
           Send another
@@ -71,14 +71,14 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-10">
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <FieldLabel htmlFor="type" en="Type" ja="お問い合わせ種別" required />
         <select
           id="type"
           name="type"
           required
           defaultValue=""
-          className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" fill="none"><path stroke="%23000" d="M1 1.5 6 6.5 11 1.5"/></svg>')] bg-[length:12px_8px] bg-[right_8px_center] bg-no-repeat pr-8`}
+          className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="8" fill="none"><path stroke="%23000" d="M1 1.5 8 6.5 15 1.5"/></svg>')] bg-[length:16px_8px] bg-[right_8px_center] bg-no-repeat pr-8`}
         >
           <option value="" hidden>
             お問い合わせ種別を選択してください。
@@ -91,7 +91,7 @@ export function ContactForm() {
         </select>
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <FieldLabel htmlFor="name" en="Name" ja="お名前" required />
         <input
           id="name"
@@ -103,7 +103,7 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <FieldLabel htmlFor="company" en="Company name" ja="会社 組織名" required={false} />
         <input
           id="company"
@@ -114,7 +114,7 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <FieldLabel htmlFor="email" en="Mail Address" ja="メールアドレス" required />
         <input
           id="email"
@@ -126,7 +126,7 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <FieldLabel htmlFor="message" en="Message" ja="お問い合わせ内容" required />
         <textarea
           id="message"
@@ -134,18 +134,18 @@ export function ContactForm() {
           required
           placeholder="お問い合わせ内容をご記入ください。"
           rows={6}
-          className={`${inputClass} min-h-[8.5rem] resize-y`}
+          className={`${inputClass} min-h-[136px] resize-y`}
         />
       </div>
 
       {status === "error" ? (
-        <p className="text-[13px]">必須項目をご入力ください。</p>
+        <p className="text-[16px] leading-8">必須項目をご入力ください。</p>
       ) : null}
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mx-auto mt-2 flex h-10 items-center justify-center gap-2 rounded-full border border-black px-8 text-[14px] tracking-[0.05em] disabled:opacity-50"
+        className="mx-auto mt-2 flex h-10 items-center justify-center gap-2 rounded-full border border-black px-8 text-[16px] leading-8 tracking-[0.05em] disabled:opacity-50"
         aria-label="Submit"
       >
         {status === "sending" ? (
@@ -155,7 +155,7 @@ export function ContactForm() {
             Send Message
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
+              width="16"
               height="8"
               fill="none"
               viewBox="0 0 20 8"

@@ -33,7 +33,7 @@ export default function ProfilePage() {
           />
         </figure>
         <div>
-          <h2 className="ff-mi text-[28px] tracking-[0.2em] md:text-[36px]">たいたい</h2>
+          <h2 className="ff-mi text-[32px] leading-8 tracking-[0.2em] md:text-[40px] md:leading-10">たいたい</h2>
           <p className="mt-8">
             関東のイベントを中心にイラストレーターや漫画を描いて活動しています。
             <br />
@@ -48,7 +48,7 @@ export default function ProfilePage() {
             {timeline.map((item) => (
               <div key={item.body}>
                 {"year" in item ? (
-                  <dt className="ff-en text-[12px] tracking-[0.16em]">{item.year}</dt>
+                  <dt className="ff-en text-[16px] leading-8 tracking-[0.16em]">{item.year}</dt>
                 ) : null}
                 <dd>{item.body}</dd>
               </div>
@@ -56,8 +56,8 @@ export default function ProfilePage() {
           </dl>
 
           <section className="mt-14">
-            <h3 className="ff-mi text-[22px] tracking-[0.2em] md:text-[26px]">実績</h3>
-            <p className="mt-5">漫画の構成</p>
+            <h3 className="ff-mi text-[24px] leading-8 tracking-[0.2em]">実績</h3>
+            <p className="mt-4">漫画の構成</p>
             <p>部分的な線画やトーン貼りなど。</p>
           </section>
 

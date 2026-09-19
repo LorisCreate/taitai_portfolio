@@ -87,13 +87,13 @@ export function GalleryIndex() {
 
   return (
     <div ref={trackRef} className="relative" style={{ height: `${Math.max(count, 4) * 70}vh` }}>
-      <div className="sticky top-[72px] h-[calc(100svh-72px)] overflow-hidden md:top-[88px] md:h-[calc(100svh-88px)] lg:top-[100px] lg:h-[calc(100svh-100px)]">
-        <div className="absolute top-4 right-6 left-6 z-30 flex flex-col gap-4 md:top-6 md:right-8 md:left-8 md:flex-row md:items-start md:justify-between">
-          <p className="ff-en pointer-events-none text-[12px] tracking-[0.2em]">
+      <div className="sticky top-[72px] h-[calc(100svh-72px)] overflow-hidden md:top-[88px] md:h-[calc(100svh-88px)] lg:top-[96px] lg:h-[calc(100svh-96px)]">
+        <div className="absolute top-4 right-6 left-6 z-30 flex flex-col gap-4 md:top-8 md:right-8 md:left-8 md:flex-row md:items-start md:justify-between">
+          <p className="ff-en pointer-events-none text-[16px] leading-8 tracking-[0.2em]">
             pickup works
           </p>
           <div
-            className="flex flex-wrap items-center gap-2 md:gap-2.5"
+            className="flex flex-wrap items-center gap-2"
             role="tablist"
             aria-label="作品の絞り込み"
           >
@@ -106,7 +106,7 @@ export function GalleryIndex() {
                   role="tab"
                   aria-selected={selected}
                   onClick={() => selectFilter(item)}
-                  className={`gallery-filter ${item === "ALL" ? "ff-en" : ""} text-[12px] md:text-[13px] ${
+                  className={`gallery-filter ${item === "ALL" ? "ff-en" : ""} text-[16px] ${
                     selected ? "is-on" : ""
                   }`}
                 >
@@ -120,7 +120,7 @@ export function GalleryIndex() {
         <div className="absolute inset-0">
           <div className="pointer-events-none absolute top-[18%] right-[-20%] left-[-20%] h-[70%] rounded-[50%] border border-black/10" />
           {count === 0 ? (
-            <p className="absolute inset-0 flex items-center justify-center text-[13px] tracking-[0.08em]">
+            <p className="absolute inset-0 flex items-center justify-center text-[16px] leading-8 tracking-[0.08em]">
               該当する作品はありません。
             </p>
           ) : (
@@ -129,7 +129,7 @@ export function GalleryIndex() {
                 key={work.slug}
                 type="button"
                 onClick={() => setFront(work)}
-                className="gallery-card absolute top-1/2 left-1/2 h-[42vw] max-h-[420px] min-h-[210px] w-[30vw] max-w-[300px] min-w-[150px] origin-center cursor-pointer overflow-hidden bg-neutral-100 shadow-[0_18px_40px_rgba(0,0,0,0.12)] md:h-[46vh] md:w-[22vw]"
+                className="gallery-card absolute top-1/2 left-1/2 h-[42vw] max-h-[416px] min-h-[208px] w-[30vw] max-w-[304px] min-w-[152px] origin-center cursor-pointer overflow-hidden bg-neutral-100 shadow-[0_16px_40px_rgba(0,0,0,0.12)] md:h-[46vh] md:w-[22vw]"
                 style={{
                   zIndex: z,
                   opacity,
@@ -152,14 +152,14 @@ export function GalleryIndex() {
 
       {front ? (
         <div
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-white/70 px-5 backdrop-blur-[2px]"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-white/70 px-4 backdrop-blur-[2px]"
           onClick={() => setFront(null)}
         >
           <figure
             className="gallery-front relative w-full max-w-[520px]"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100 shadow-[0_24px_60px_rgba(0,0,0,0.18)]">
+            <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100 shadow-[0_24px_56px_rgba(0,0,0,0.18)]">
               <Image
                 src={front.image}
                 alt={front.title}
@@ -169,23 +169,23 @@ export function GalleryIndex() {
                 priority
               />
             </div>
-            <figcaption className="mt-5 flex items-end justify-between gap-4">
+            <figcaption className="mt-4 flex items-end justify-between gap-4">
               <div>
-                <p className="text-[12px] tracking-[0.16em]">
+                <p className="text-[16px] leading-8 tracking-[0.16em]">
                   {front.tag}　/　{front.date}
                 </p>
-                <h2 className="mt-1 text-[18px] tracking-[0.12em]">{front.title}</h2>
+                <h2 className="mt-2 text-[16px] leading-8 tracking-[0.12em] md:text-[24px] md:leading-8">{front.title}</h2>
               </div>
               <Link
                 href={`/gallery/${front.slug}`}
-                className="ff-en text-[12px] tracking-[0.16em] underline"
+                className="ff-en text-[16px] leading-8 tracking-[0.16em] underline"
               >
                 view
               </Link>
             </figcaption>
             <button
               type="button"
-              className="ff-en mt-6 text-[12px] tracking-[0.18em]"
+              className="ff-en mt-8 text-[16px] leading-8 tracking-[0.18em]"
               onClick={() => setFront(null)}
             >
               close

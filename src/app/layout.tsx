@@ -34,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full text-black">
         <SiteHeader />
-        <div className="pt-[72px] md:pt-[88px] lg:pt-[100px]">{children}</div>
+        <div className="pt-[72px] md:pt-[88px] lg:pt-[96px]">{children}</div>
         <SiteFooter />
       </body>
     </html>

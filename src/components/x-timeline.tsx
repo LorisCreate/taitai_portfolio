@@ -28,7 +28,7 @@ export async function XTimeline() {
 
   return (
     <div
-      className="max-h-[520px] overflow-y-auto border-t border-black/15 px-0"
+      className="max-h-[520px] overflow-y-auto border-t border-black/15"
       aria-label={`@${X_SCREEN_NAME} のXタイムライン`}
     >
       {posts.map((post) => (
