@@ -2,7 +2,8 @@ export const site = {
   name: "ATELIER 516",
   person: "たいたい",
   role: "PHOTOGRAPHER",
-  tagline: "web design, graphic design, photograph,\ntravel, column, wakuwaku and more..",
+  tagline:
+    "Illustration,Manga,Live2D\nNature,Web,Column\nIyashi,wakuwaku and more and more",
   instagram: "https://www.instagram.com/taitai_illust/?hl=ja",
   x: "https://x.com/taitai_pon",
   pixiv: "https://www.pixiv.net/users/37033465",
