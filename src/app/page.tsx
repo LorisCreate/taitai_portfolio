@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { HeroSlider } from "@/components/hero-slider";
+import { InstagramIcon } from "@/components/instagram-icon";
 import { Reveal } from "@/components/reveal";
 import { TextLink } from "@/components/text-link";
 import { WorksSlider } from "@/components/works-slider";
@@ -250,6 +251,15 @@ export default function Home() {
                   instagram
                 </h2>
                 <p className="ff-mi tracking-[0.16em]">インスタグラム</p>
+                <a
+                  href={site.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="mb-0.5 text-black transition-opacity hover:opacity-55"
+                >
+                  <InstagramIcon className="h-5 w-5" />
+                </a>
               </div>
               <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {instagramFeed.map((src) => (
