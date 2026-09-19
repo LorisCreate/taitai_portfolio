@@ -246,21 +246,18 @@ export default function Home() {
               </div>
             </div>
             <div className="md:pl-12">
-              <div className="flex flex-wrap items-end gap-4">
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-wrap items-end gap-4 text-black transition-opacity hover:opacity-55"
+              >
                 <h2 className="ff-en text-[32px] tracking-[0.18em] md:text-[36px]">
                   instagram
                 </h2>
                 <p className="ff-mi tracking-[0.16em]">インスタグラム</p>
-                <a
-                  href={site.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Instagram"
-                  className="mb-0.5 text-black transition-opacity hover:opacity-55"
-                >
-                  <InstagramIcon className="h-5 w-5" />
-                </a>
-              </div>
+                <InstagramIcon className="mb-0.5 h-5 w-5" />
+              </a>
               <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {instagramFeed.map((src) => (
                   <a
