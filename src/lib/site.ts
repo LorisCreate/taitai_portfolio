@@ -7,7 +7,7 @@ export const site = {
   instagram: "https://www.instagram.com/taitai_illust/?hl=ja",
   x: "https://x.com/taitai_pon",
   pixiv: "https://www.pixiv.net/users/37033465",
-  contactTo: "taitai.0221@taichaduke.com",
+  contactTo: "taitaisubad@gmail.com",
 };
 
 /** Set to true to show the homepage my works pickup again. */

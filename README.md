@@ -13,7 +13,7 @@ npm run dev
 
 ## お問い合わせフォーム
 
-Contact の送信先は `taitai.0221@taichaduke.com` です。送信には [Resend](https://resend.com) を使います。キーが無いときは Thank you を出さず、画面に失敗を表示します。
+Contact の送信先は `taitaisubad@gmail.com` です。送信には [Resend](https://resend.com) を使います。キーが無いときは Thank you を出さず、画面に失敗を表示します。
 
 プロジェクト直下に `.env.local` を置き、次を設定してから `npm run dev` を再起動してください。
 
