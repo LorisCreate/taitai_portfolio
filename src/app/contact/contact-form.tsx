@@ -30,6 +30,7 @@ const inputClass =
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("必須項目をご入力ください。");
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -37,18 +38,38 @@ export function ContactForm() {
     const data = new FormData(form);
     const type = String(data.get("type") ?? "").trim();
     const name = String(data.get("name") ?? "").trim();
+    const company = String(data.get("company") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
     if (!type || !name || !email || !message) {
+      setErrorMessage("必須項目をご入力ください。");
       setStatus("error");
       return;
     }
 
     setStatus("sending");
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    form.reset();
-    setStatus("success");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, name, company, email, message }),
+      });
+      const payload = (await response.json().catch(() => ({}))) as { error?: string };
+
+      if (!response.ok) {
+        setErrorMessage(payload.error ?? "送信に失敗しました。時間をおいて再度お試しください。");
+        setStatus("error");
+        return;
+      }
+
+      form.reset();
+      setStatus("success");
+    } catch {
+      setErrorMessage("送信に失敗しました。通信状況をご確認のうえ、再度お試しください。");
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
@@ -139,7 +160,7 @@ export function ContactForm() {
       </div>
 
       {status === "error" ? (
-        <p className="text-[16px] leading-8">必須項目をご入力ください。</p>
+        <p className="text-[16px] leading-8">{errorMessage}</p>
       ) : null}
 
       <button
