@@ -12,7 +12,7 @@ export async function XTimeline() {
 
   if (failed || posts.length === 0) {
     return (
-      <p className="text-[13px] tracking-[0.08em]">
+      <p className="text-[16px] leading-8 tracking-[0.08em]">
         タイムラインを読み込めませんでした。
         <a
           className="ml-2 underline"
@@ -28,13 +28,13 @@ export async function XTimeline() {
 
   return (
     <div
-      className="max-h-[520px] overflow-y-auto border-t border-black/15"
+      className="max-h-[520px] overflow-y-auto border-t border-black/15 px-0"
       aria-label={`@${X_SCREEN_NAME} のXタイムライン`}
     >
       {posts.map((post) => (
         <article key={post.id} className="border-b border-black/15 py-4">
           {post.reposted ? (
-            <p className="mb-2 pl-12 text-[11px] tracking-[0.08em] text-neutral-500">
+            <p className="mb-2 pl-12 text-[16px] leading-8 tracking-[0.08em] text-neutral-500">
               @{X_SCREEN_NAME} がリポスト
             </p>
           ) : null}
@@ -42,7 +42,7 @@ export async function XTimeline() {
             href={post.url}
             target="_blank"
             rel="noreferrer"
-            className="flex gap-3 text-inherit no-underline transition-opacity hover:opacity-70"
+            className="flex gap-4 text-inherit no-underline transition-opacity hover:opacity-70"
           >
             {post.authorAvatar ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -57,26 +57,26 @@ export async function XTimeline() {
               <span className="h-10 w-10 shrink-0 rounded-full bg-neutral-200" />
             )}
             <div className="min-w-0 flex-1">
-              <p className="flex flex-wrap items-baseline gap-x-2 text-[13px] leading-snug">
+              <p className="flex flex-wrap items-baseline gap-x-2 text-[16px] leading-8">
                 <span className="font-medium tracking-[0.04em]">{post.authorName}</span>
-                <span className="ff-en text-[12px] text-neutral-500">
+                <span className="ff-en text-[16px] text-neutral-500">
                   @{post.authorHandle}
                 </span>
                 {post.createdLabel ? (
-                  <span className="ff-en text-[11px] text-neutral-400">
+                  <span className="ff-en text-[16px] text-neutral-400">
                     {post.createdLabel}
                   </span>
                 ) : null}
               </p>
               {post.text ? (
-                <p className="mt-1 whitespace-pre-wrap text-[13px] leading-[1.8] tracking-[0.04em]">
+                <p className="mt-2 whitespace-pre-wrap text-[16px] leading-8 tracking-[0.04em]">
                   {post.text}
                 </p>
               ) : null}
               {post.photos.length > 0 ? (
                 <div
-                  className={`mt-3 overflow-hidden ${
-                    post.photos.length > 1 ? "grid grid-cols-2 gap-1" : ""
+                  className={`mt-4 overflow-hidden ${
+                    post.photos.length > 1 ? "grid grid-cols-2 gap-2" : ""
                   }`}
                 >
                   {post.photos.map((src) => (

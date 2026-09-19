@@ -220,15 +220,15 @@ export default function Home() {
         <Reveal as="section" id="sns" className="mt-24 md:mt-32">
           <div className="mx-auto max-w-[720px]">
             <div className="flex flex-wrap items-end gap-4">
-              <h2 className="ff-en text-[32px] tracking-[0.18em] md:text-[36px]">
+              <h2 className="ff-en text-[32px] leading-8 tracking-[0.16em] md:text-[40px] md:leading-10">
                 x
               </h2>
-              <p className="ff-mi tracking-[0.16em]">エックス</p>
+              <p className="ff-mi text-[16px] leading-8 tracking-[0.16em]">エックス</p>
             </div>
             <div className="mt-8">
               <Suspense
                 fallback={
-                  <p className="text-[12px] tracking-[0.08em] text-neutral-500">
+                  <p className="text-[16px] leading-8 tracking-[0.08em] text-neutral-500">
                     タイムラインを読み込み中…
                   </p>
                 }
