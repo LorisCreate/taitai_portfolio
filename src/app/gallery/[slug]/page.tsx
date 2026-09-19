@@ -2,14 +2,16 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageTitle } from "@/components/page-title";
 import { TextLink } from "@/components/text-link";
-import { galleryWorks, getGalleryWork } from "@/lib/site";
+import { getGalleryWork, listGalleryWorks } from "@/lib/gallery";
+
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  return galleryWorks.map((work) => ({ slug: work.slug }));
+  return listGalleryWorks().map((work) => ({ slug: work.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -28,12 +30,16 @@ export default async function GalleryWorkPage({ params }: Props) {
     notFound();
   }
 
+  const en = decodeURIComponent(work.slug).replaceAll("-", " ");
+
   return (
     <main className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
-      <PageTitle en={work.slug.replaceAll("-", " ")} ja={work.title} />
+      <PageTitle en={en} ja={work.title} />
 
-      <p className="ff-en mt-8 text-[16px] leading-8 tracking-[0.14em]">{work.date}</p>
-      <p className="mt-6 max-w-2xl">{work.body}</p>
+      {work.date ? (
+        <p className="ff-en mt-8 text-[16px] leading-8 tracking-[0.14em]">{work.date}</p>
+      ) : null}
+      {work.body ? <p className="mt-6 max-w-2xl">{work.body}</p> : null}
 
       <div className="mt-12 space-y-8">
         {work.images.map((src) => (

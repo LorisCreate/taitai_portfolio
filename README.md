@@ -30,7 +30,17 @@ RESEND_FROM_EMAIL=onboarding@resend.dev
 ## ページ
 
 - `/` トップ（ヒーロー、what's new、about、design、photograph、works、instagram、contact）
-- `/gallery` 作品ギャラリー
+- `/gallery` 作品ギャラリー（`public/image_card` のサムネと `public/original` / `public/funart` の jpg をファイル名で対応）
 - `/profile` プロフィール
 - `/event` イベント・お知らせ
 - `/contact` お問い合わせ
+
+## Gallery 画像
+
+`src/lib/site.ts` には作品パスを書きません。サーバーが次のフォルダを読みます。
+
+- `public/image_card/` … グリッドのサムネ
+- `public/original/` … タグ「オリジナル」の原寸
+- `public/funart/` … タグ「二次創作」の原寸
+
+同じファイル名（拡張子以外）でサムネと原寸を結びます。例: `image_card/foo.jpg` と `original/foo.jpg`。フォルダに jpg を足せば Gallery に出ます。このリポジトリのクローン側に画像がある場合は、その `public/` をコミットして push してください。

@@ -3,18 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  galleryFilters,
-  galleryWorks,
-  type GalleryTag,
-  type GalleryWork,
-} from "@/lib/site";
+import { galleryFilters, type GalleryTag, type GalleryWork } from "@/lib/site";
 
 const SPACING = 30;
 
 type Filter = (typeof galleryFilters)[number];
 
-export function GalleryIndex() {
+export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState<Filter>("ALL");
   const [progress, setProgress] = useState(0);
@@ -23,9 +18,9 @@ export function GalleryIndex() {
   const works = useMemo(
     () =>
       filter === "ALL"
-        ? galleryWorks
-        : galleryWorks.filter((work) => work.tag === (filter as GalleryTag)),
-    [filter],
+        ? allWorks
+        : allWorks.filter((work) => work.tag === (filter as GalleryTag)),
+    [allWorks, filter],
   );
 
   const updateProgress = useCallback(() => {
@@ -120,8 +115,10 @@ export function GalleryIndex() {
         <div className="absolute inset-0">
           <div className="pointer-events-none absolute top-[18%] right-[-20%] left-[-20%] h-[70%] rounded-[50%] border border-black/10" />
           {count === 0 ? (
-            <p className="absolute inset-0 flex items-center justify-center text-[16px] leading-8 tracking-[0.08em]">
-              該当する作品はありません。
+            <p className="absolute inset-0 flex items-center justify-center px-8 text-center text-[16px] leading-8 tracking-[0.08em]">
+              {allWorks.length === 0
+                ? "作品画像がまだありません。public/image_card と original / funart にファイルを置いてください。"
+                : "該当する作品はありません。"}
             </p>
           ) : (
             items.map(({ work, x, y, rotate, scale, z, opacity }) => (
@@ -161,7 +158,7 @@ export function GalleryIndex() {
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100 shadow-[0_24px_56px_rgba(0,0,0,0.18)]">
               <Image
-                src={front.image}
+                src={front.images[0] ?? front.image}
                 alt={front.title}
                 fill
                 sizes="520px"
@@ -172,7 +169,7 @@ export function GalleryIndex() {
             <figcaption className="mt-4 flex items-end justify-between gap-4">
               <div>
                 <p className="text-[16px] leading-8 tracking-[0.16em]">
-                  {front.tag}　/　{front.date}
+                  {[front.tag, front.date].filter(Boolean).join("　/　")}
                 </p>
                 <h2 className="mt-2 text-[16px] leading-8 tracking-[0.12em] md:text-[24px] md:leading-8">{front.title}</h2>
               </div>
