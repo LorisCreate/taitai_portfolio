@@ -18,12 +18,12 @@ Contact の送信先は `taitaisubad@gmail.com` です。送信には [Resend](h
 プロジェクト直下に `.env.local` を置き、次を設定してから `npm run dev` を再起動してください。
 
 ```bash
-RESEND_API_KEY=re_xxxxxxxx
-RESEND_FROM_EMAIL="たいたい <noreply@your-verified-domain.com>"
+RESEND_API_KEY=
+RESEND_FROM_EMAIL=onboarding@resend.dev
 ```
 
-- `RESEND_API_KEY` … Resend の API キー
-- `RESEND_FROM_EMAIL` … Resend で認証した送信元（From）。未認証のアドレスでは Resend 側で送れません
+- `RESEND_API_KEY` … Resend の API キー（値は `.env.local` のみ。Git に入れない）
+- `RESEND_FROM_EMAIL` … 送信元。Resend 公式サンプルのテスト用 From は `onboarding@resend.dev`。本番用ドメインは認証後に差し替える
 
 受信アドレスはコード側で固定しています。`.env.example` にも同じ変数名を書いてあります。
 
