@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { HeroSlider } from "@/components/hero-slider";
-import { InstagramIcon } from "@/components/instagram-icon";
 import { Reveal } from "@/components/reveal";
 import { TextLink } from "@/components/text-link";
 import { WorksSlider } from "@/components/works-slider";
@@ -10,7 +9,6 @@ import { XTimeline } from "@/components/x-timeline";
 import {
   aboutPortrait,
   designImages,
-  instagramFeed,
   mangaImages,
   news,
   photoImages,
@@ -220,69 +218,27 @@ export default function Home() {
         ) : null}
 
         <Reveal as="section" id="sns" className="mt-24 md:mt-32">
-          <div className="grid gap-14 md:grid-cols-2 md:gap-0">
-            <div className="md:border-r md:border-black md:pr-12">
-              <div className="flex flex-wrap items-end gap-4">
-                <h2 className="ff-en text-[32px] tracking-[0.18em] md:text-[36px]">
-                  x
-                </h2>
-                <p className="ff-mi tracking-[0.16em]">エックス</p>
-              </div>
-              <div className="mt-8">
-                <Suspense
-                  fallback={
-                    <p className="text-[12px] tracking-[0.08em] text-neutral-500">
-                      タイムラインを読み込み中…
-                    </p>
-                  }
-                >
-                  <XTimeline />
-                </Suspense>
-              </div>
-              <div className="mt-8">
-                <TextLink href={site.x} external>
-                  follow @taitai_pon
-                </TextLink>
-              </div>
-            </div>
-            <div className="md:pl-12">
-              <a
-                href={site.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="flex flex-wrap items-end gap-4 text-black transition-opacity hover:opacity-55"
-              >
-                <h2 className="ff-en text-[32px] tracking-[0.18em] md:text-[36px]">
-                  instagram
-                </h2>
-                <p className="ff-mi tracking-[0.16em]">インスタグラム</p>
-                <InstagramIcon className="mb-0.5 h-5 w-5" />
-              </a>
-              <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                {instagramFeed.map((src) => (
-                  <a
-                    key={src}
-                    href={site.instagram}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group overflow-hidden"
-                  >
-                    <Image
-                      src={src}
-                      alt="Instagramの投稿"
-                      width={400}
-                      height={400}
-                      className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                  </a>
-                ))}
-              </div>
-              <div className="mt-10">
-                <TextLink href={site.instagram} external>
-                  follow @taitai_illust
-                </TextLink>
-              </div>
-            </div>
+          <div className="flex flex-wrap items-end gap-4">
+            <h2 className="ff-en text-[32px] tracking-[0.18em] md:text-[36px]">
+              x
+            </h2>
+            <p className="ff-mi tracking-[0.16em]">エックス</p>
+          </div>
+          <div className="mt-8 max-w-[560px]">
+            <Suspense
+              fallback={
+                <p className="text-[12px] tracking-[0.08em] text-neutral-500">
+                  タイムラインを読み込み中…
+                </p>
+              }
+            >
+              <XTimeline />
+            </Suspense>
+          </div>
+          <div className="mt-8">
+            <TextLink href={site.x} external>
+              follow @taitai_pon
+            </TextLink>
           </div>
         </Reveal>
       </div>
