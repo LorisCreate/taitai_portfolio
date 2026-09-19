@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { PageTitle } from "@/components/page-title";
 import { TextLink } from "@/components/text-link";
 import { galleryWorks, getGalleryWork } from "@/lib/site";
 
@@ -29,12 +30,7 @@ export default async function GalleryWorkPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-[1200px] px-6 pb-24 md:px-8">
-      <div className="page-hero">
-        <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:items-end">
-          <h1 className="ff-en text-[28px] tracking-[0.16em] md:text-[36px]">{work.title}</h1>
-          <p className="text-[14px] tracking-[0.16em]">{work.tag}</p>
-        </div>
-      </div>
+      <PageTitle en={work.slug.replaceAll("-", " ")} ja={work.title} />
 
       <p className="ff-en mt-10 text-[13px] tracking-[0.14em]">{work.date}</p>
       <p className="mt-6 max-w-2xl">{work.body}</p>
