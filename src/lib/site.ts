@@ -52,7 +52,7 @@ export const designImages = [
 ];
 
 export const photoImages = [
-  "https://images.unsplash.com/photo-1478144592103-25e218a04891?auto=format&fit=crop&w=800&q=80",
+  "/live2d/live2d_image_01.jpg",
   "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
   "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
 ];
