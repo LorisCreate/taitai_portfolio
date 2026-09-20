@@ -18,7 +18,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState<Filter>("ALL");
   const [progress, setProgress] = useState(0);
-  const [front, setFront] = useState<GalleryWork | null>(null);
+  const [frontIndex, setFrontIndex] = useState<number | null>(null);
 
   const works = useMemo(
     () =>
@@ -26,6 +26,19 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
         ? allWorks
         : allWorks.filter((work) => work.tag === (filter as GalleryTag)),
     [allWorks, filter],
+  );
+
+  const front = frontIndex == null ? null : (works[frontIndex] ?? null);
+
+  const stepFront = useCallback(
+    (delta: number) => {
+      if (works.length === 0) return;
+      setFrontIndex((current) => {
+        const from = current ?? 0;
+        return (from + delta + works.length) % works.length;
+      });
+    },
+    [works.length],
   );
 
   const updateProgress = useCallback(() => {
@@ -49,15 +62,27 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
 
   const selectFilter = (next: Filter) => {
     setFilter(next);
-    setFront(null);
+    setFrontIndex(null);
     setProgress(0);
     window.scrollTo(0, 0);
   };
 
   useEffect(() => {
-    if (!front) return;
+    if (frontIndex == null) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setFront(null);
+      if (event.key === "Escape") {
+        setFrontIndex(null);
+        return;
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        stepFront(1);
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        stepFront(-1);
+      }
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
@@ -65,7 +90,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [front]);
+  }, [frontIndex, stepFront]);
 
   const count = works.length;
   const offset = progress * Math.max(count - 1, 1);
@@ -126,11 +151,11 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 : "該当する作品はありません。"}
             </p>
           ) : (
-            items.map(({ work, x, y, rotate, scale, z, opacity }) => (
+            items.map(({ work, x, y, rotate, scale, z, opacity }, index) => (
               <button
                 key={work.slug}
                 type="button"
-                onClick={() => setFront(work)}
+                onClick={() => setFrontIndex(index)}
                 className="gallery-card absolute top-1/2 left-1/2 h-[42vw] max-h-[416px] min-h-[208px] w-[30vw] max-w-[304px] min-w-[152px] origin-center cursor-pointer overflow-hidden bg-neutral-100 shadow-[0_16px_40px_rgba(0,0,0,0.12)] md:h-[46vh] md:w-[22vw]"
                 style={{
                   zIndex: z,
@@ -155,7 +180,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
       {front ? (
         <div
           className="fixed inset-0 z-[80] flex items-center justify-center bg-white/70 px-4 backdrop-blur-[2px]"
-          onClick={() => setFront(null)}
+          onClick={() => setFrontIndex(null)}
         >
           <figure
             className="gallery-front relative w-full max-w-[520px]"
@@ -187,13 +212,41 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 </Link>
               ) : null}
             </figcaption>
-            <button
-              type="button"
-              className="ff-en mt-8 text-[16px] leading-8 tracking-[0.18em]"
-              onClick={() => setFront(null)}
-            >
-              close
-            </button>
+            {works.length > 1 ? (
+              <div className="mt-8 flex items-center justify-between gap-8">
+                <button
+                  type="button"
+                  className="ff-en h-8 text-[16px] leading-8 tracking-[0.18em]"
+                  onClick={() => stepFront(-1)}
+                  aria-label="前の作品"
+                >
+                  prev
+                </button>
+                <button
+                  type="button"
+                  className="ff-en h-8 text-[16px] leading-8 tracking-[0.18em]"
+                  onClick={() => setFrontIndex(null)}
+                >
+                  close
+                </button>
+                <button
+                  type="button"
+                  className="ff-en h-8 text-[16px] leading-8 tracking-[0.18em]"
+                  onClick={() => stepFront(1)}
+                  aria-label="次の作品"
+                >
+                  next
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="ff-en mt-8 text-[16px] leading-8 tracking-[0.18em]"
+                onClick={() => setFrontIndex(null)}
+              >
+                close
+              </button>
+            )}
           </figure>
         </div>
       ) : null}
