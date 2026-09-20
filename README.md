@@ -49,4 +49,4 @@ RESEND_FROM_EMAIL=onboarding@resend.dev
 
 トップ「わたしのこと」は `public/about/aboutPortrait01.jpg`、Profile は `public/about/aboutPortrait02.jpg` です。画像本体はこのリポジトリに含めず、ローカルの `public/about/` に置いてください。
 
-トップのヒーローは `public/hero/` の jpg / png / webp / gif をファイル名順でスライドします（5秒）。漫画ブロックは `public/manga/` です。WSL 側にファイルがある場合は `git pull` のうえ、そのフォルダをコミットしてください。
+トップのヒーローは `public/hero/`、イラストは `public/illustration/`、漫画は `public/manga/` です。jpg / png / webp / gif をファイル名順で出します。WSL 側にファイルがある場合は `git pull` のうえ、そのフォルダをコミットしてください。

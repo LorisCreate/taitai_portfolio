@@ -9,7 +9,6 @@ import { XTimeline } from "@/components/x-timeline";
 import { listPublicFolderImages } from "@/lib/public-images";
 import {
   aboutPortraitHome,
-  designImages,
   news,
   photoImages,
   showIllustration,
@@ -22,6 +21,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   const heroImages = listPublicFolderImages("hero");
+  const illustrationImages = listPublicFolderImages("illustration");
   const mangaImages = listPublicFolderImages("manga");
   return (
     <main>
@@ -102,10 +102,12 @@ export default function Home() {
             illustration
           </p>
           <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
-            {designImages.map((src, i) => (
+            {illustrationImages.map((src, i) => (
               <figure
                 key={src}
-                className={i === 1 ? "hidden md:block" : undefined}
+                className={
+                  illustrationImages.length === 3 && i === 1 ? "hidden md:block" : undefined
+                }
               >
                 <Image
                   src={src}

@@ -49,6 +49,10 @@ function titleFromBase(base: string) {
   return base.replace(/[_-]+/g, " ").trim() || base;
 }
 
+function slugFromBase(base: string) {
+  return base;
+}
+
 function filenameNumber(name: string) {
   const matches = name.match(/\d+/g);
   if (!matches) return null;

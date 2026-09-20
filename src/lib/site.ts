@@ -14,7 +14,7 @@ export const site = {
 export const showMyWorks = false;
 
 /** Set to true to show the homepage illustration block again. */
-export const showIllustration = false;
+export const showIllustration = true;
 
 /** Set to true to show the homepage manga block again. */
 export const showManga = true;
@@ -44,12 +44,6 @@ export const news = [
 
 export const aboutPortraitHome = "/about/aboutPortrait01.jpg";
 export const aboutPortraitProfile = "/about/aboutPortrait02.jpg";
-
-export const designImages = [
-  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80",
-];
 
 export const photoImages = ["/live2d/live2d_image_01.jpg"];
 
