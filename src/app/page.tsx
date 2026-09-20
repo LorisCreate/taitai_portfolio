@@ -7,7 +7,7 @@ import { TextLink } from "@/components/text-link";
 import { WorksSlider } from "@/components/works-slider";
 import { XTimeline } from "@/components/x-timeline";
 import {
-  aboutPortrait,
+  aboutPortraitHome,
   designImages,
   mangaImages,
   news,
@@ -78,7 +78,7 @@ export default function Home() {
           </div>
           <figure className="order-1 overflow-hidden md:order-2">
             <Image
-              src={aboutPortrait}
+              src={aboutPortraitHome}
               alt="プロフィール写真"
               width={770}
               height={770}

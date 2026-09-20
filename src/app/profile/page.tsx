@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { PageTitle } from "@/components/page-title";
 import { TextLink } from "@/components/text-link";
-import { aboutPortrait } from "@/lib/site";
+import { aboutPortraitProfile } from "@/lib/site";
 
 export const metadata = {
   title: "Profile｜ATELIER 516",
@@ -25,7 +25,7 @@ export default function ProfilePage() {
       <section className="mt-16 grid items-start gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-20">
         <figure>
           <Image
-            src={aboutPortrait}
+            src={aboutPortraitProfile}
             alt="たいたい"
             width={800}
             height={1000}

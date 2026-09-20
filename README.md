@@ -46,3 +46,5 @@ RESEND_FROM_EMAIL=onboarding@resend.dev
 同じファイル名（拡張子以外）でサムネと原寸を結びます。例: `image_card/foo.jpg` と `original/foo.jpg`。フォルダに jpg を足せば Gallery に出ます。このリポジトリのクローン側に画像がある場合は、その `public/` をコミットして push してください。
 
 作品詳細（`/gallery/[slug]`）は非公開です。グリッドの拡大オーバーレイのみ出します。再び公開するときは `src/lib/site.ts` の `showGalleryDetailPages` を `true` にしてください。
+
+トップ「わたしのこと」は `public/about/aboutPortrait01.jpg`、Profile は `public/about/aboutPortrait02.jpg` です。画像本体はこのリポジトリに含めず、ローカルの `public/about/` に置いてください。

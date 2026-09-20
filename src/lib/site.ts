@@ -44,8 +44,8 @@ export const heroImages = [
   "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=80",
 ];
 
-export const aboutPortrait =
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80";
+export const aboutPortraitHome = "/about/aboutPortrait01.jpg";
+export const aboutPortraitProfile = "/about/aboutPortrait02.jpg";
 
 export const designImages = [
   "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
