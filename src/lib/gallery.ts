@@ -49,8 +49,19 @@ function titleFromBase(base: string) {
   return base.replace(/[_-]+/g, " ").trim() || base;
 }
 
-function slugFromBase(base: string) {
-  return base;
+function filenameNumber(name: string) {
+  const matches = name.match(/\d+/g);
+  if (!matches) return null;
+  return Number(matches[matches.length - 1]);
+}
+
+function compareFilenameDesc(a: string, b: string) {
+  const na = filenameNumber(a);
+  const nb = filenameNumber(b);
+  if (na != null && nb != null && na !== nb) return nb - na;
+  if (na != null && nb == null) return -1;
+  if (na == null && nb != null) return 1;
+  return b.localeCompare(a, "en", { numeric: true, sensitivity: "base" });
 }
 
 /**
@@ -93,7 +104,7 @@ export function listGalleryWorks(): GalleryWork[] {
     });
   }
 
-  works.sort((a, b) => a.title.localeCompare(b.title, "ja"));
+  works.sort((a, b) => compareFilenameDesc(a.slug, b.slug));
   return works;
 }
 
