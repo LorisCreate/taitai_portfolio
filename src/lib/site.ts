@@ -51,11 +51,7 @@ export const designImages = [
   "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80",
 ];
 
-export const photoImages = [
-  "/live2d/live2d_image_01.jpg",
-  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-];
+export const photoImages = ["/live2d/live2d_image_01.jpg"];
 
 export const works = [
   {

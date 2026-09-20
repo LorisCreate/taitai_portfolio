@@ -139,22 +139,15 @@ export default function Home() {
           <p className="ff-en mt-2 text-[16px] leading-8 tracking-[0.16em]">
             animation
           </p>
-          <div className="mt-6 grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
-            {photoImages.map((src, i) => (
-              <figure
-                key={src}
-                className={i === 1 ? "hidden md:block" : undefined}
-              >
-                <Image
-                  src={src}
-                  alt="Live2D"
-                  width={604}
-                  height={604}
-                  className="aspect-square h-auto w-full object-cover"
-                />
-              </figure>
-            ))}
-          </div>
+          <figure className="mt-6 w-full max-w-[560px]">
+            <Image
+              src={photoImages[0]}
+              alt="Live2D"
+              width={560}
+              height={560}
+              className="aspect-square h-auto w-full object-cover"
+            />
+          </figure>
           <div className="mt-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
             <p>
               Vtuberモデルなどに用いられるLive2Dを制作しています。
