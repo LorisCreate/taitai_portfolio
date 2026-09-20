@@ -7,9 +7,16 @@ type Props = {
   className?: string;
   id?: string;
   as?: "div" | "section";
+  delayMs?: number;
 };
 
-export function Reveal({ children, className = "", id, as = "div" }: Props) {
+export function Reveal({
+  children,
+  className = "",
+  id,
+  as = "div",
+  delayMs = 0,
+}: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
   const classes =
@@ -17,6 +24,7 @@ export function Reveal({ children, className = "", id, as = "div" }: Props) {
   const bind = (node: HTMLElement | null) => {
     ref.current = node;
   };
+  const style = delayMs ? { animationDelay: `${delayMs}ms` } : undefined;
 
   useEffect(() => {
     const el = ref.current;
@@ -38,14 +46,14 @@ export function Reveal({ children, className = "", id, as = "div" }: Props) {
 
   if (as === "section") {
     return (
-      <section id={id} ref={bind} className={classes}>
+      <section id={id} ref={bind} className={classes} style={style}>
         {children}
       </section>
     );
   }
 
   return (
-    <div id={id} ref={bind} className={classes}>
+    <div id={id} ref={bind} className={classes} style={style}>
       {children}
     </div>
   );

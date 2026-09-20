@@ -29,7 +29,7 @@ export default function Home() {
 
       <div className="mx-auto max-w-[1200px] px-6 md:px-8">
         <section className="relative z-10 mt-8 flex justify-end md:-mt-28">
-          <Reveal className="bg-washi w-full px-6 py-8 md:w-[42%] md:px-8 md:py-8">
+          <Reveal delayMs={0} className="bg-washi w-full px-6 py-8 md:w-[42%] md:px-8 md:py-8">
             <div className="flex items-center justify-between">
               <h2 className="ff-en text-[16px] leading-8 tracking-[0.14em]">what’s new</h2>
               <TextLink href="/event">all view</TextLink>
@@ -54,6 +54,7 @@ export default function Home() {
         <Reveal
           as="section"
           id="about"
+          delayMs={80}
           className="mt-16 grid items-end gap-10 md:mt-24 md:grid-cols-[1.15fr_0.85fr] md:gap-16"
         >
           <div className="order-2 md:order-1">
@@ -94,7 +95,7 @@ export default function Home() {
         </Reveal>
 
         {showIllustration ? (
-        <Reveal as="section" id="illustration" className="mt-24 md:mt-36">
+        <Reveal as="section" id="illustration" delayMs={160} className="mt-24 md:mt-36">
             <h2 className="ff-mi text-[32px] leading-8 tracking-[0.2em] md:text-[40px] md:leading-10">
             イラスト描いています
           </h2>
@@ -134,7 +135,7 @@ export default function Home() {
         </Reveal>
         ) : null}
 
-        <Reveal as="section" id="animation" className="mt-24 md:mt-36">
+        <Reveal as="section" id="animation" delayMs={80} className="mt-24 md:mt-36">
             <h2 className="ff-mi text-[32px] leading-8 tracking-[0.2em] md:text-[40px] md:leading-10">
             Live2D作ります
           </h2>
@@ -163,7 +164,7 @@ export default function Home() {
         </Reveal>
 
         {showManga ? (
-        <Reveal as="section" id="manga" className="mt-24 md:mt-36">
+        <Reveal as="section" id="manga" delayMs={160} className="mt-24 md:mt-36">
             <h2 className="ff-mi text-[32px] leading-8 tracking-[0.2em] md:text-[40px] md:leading-10">
             漫画
           </h2>
@@ -206,7 +207,7 @@ export default function Home() {
         ) : null}
 
         {showMyWorks ? (
-          <Reveal as="section" id="works" className="mt-24 md:mt-36">
+          <Reveal as="section" id="works" delayMs={80} className="mt-24 md:mt-36">
             <div className="flex flex-wrap items-center gap-4">
               <h2 className="ff-en text-[40px] leading-10 tracking-[0.18em] md:text-[48px] md:leading-[56px]">
                 my works
@@ -224,7 +225,7 @@ export default function Home() {
           </Reveal>
         ) : null}
 
-        <Reveal as="section" id="sns" className="mt-24 md:mt-32">
+        <Reveal as="section" id="sns" delayMs={0} className="mt-24 md:mt-32">
           <div className="mx-auto max-w-[720px]">
             <div className="flex flex-wrap items-end gap-4">
               <h2 className="ff-en text-[32px] leading-8 tracking-[0.16em] md:text-[40px] md:leading-10">
@@ -252,7 +253,7 @@ export default function Home() {
         </Reveal>
       </div>
 
-      <Reveal as="section" id="contact" className="mt-28 md:mt-40">
+      <Reveal as="section" id="contact" delayMs={80} className="mt-28 md:mt-40">
         <div className="mx-auto max-w-[1200px] px-6 py-16 text-center md:px-8 md:py-20">
           <h2 className="ff-en text-[48px] leading-none tracking-[0.18em] md:text-[64px]">
             contact
@@ -260,9 +261,12 @@ export default function Home() {
           <div className="mx-auto mt-8 max-w-md">
             <Link
               href="/contact"
-              className="block border border-black py-4 text-[16px] leading-8 tracking-[0.12em] transition-opacity hover:opacity-55"
+              className="home-cta w-full border border-black py-4 text-[16px] leading-8 tracking-[0.12em]"
             >
               お問合わせはこちらから
+              <span className="text-link__arrow" aria-hidden="true">
+                <span className="text-link__shaft" />
+              </span>
             </Link>
           </div>
           <p className="mx-auto mt-8 max-w-2xl text-[16px] leading-8 md:text-[16px]">

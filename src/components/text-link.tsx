@@ -25,14 +25,20 @@ export function TextLink({
         target="_blank"
         rel="noopener noreferrer"
       >
-        {children}
+        <span className="text-link__label">{children}</span>
+        <span className="text-link__arrow" aria-hidden="true">
+          <span className="text-link__shaft" />
+        </span>
       </a>
     );
   }
 
   return (
     <Link href={href} className={classes}>
-      {children}
+      <span className="text-link__label">{children}</span>
+      <span className="text-link__arrow" aria-hidden="true">
+        <span className="text-link__shaft" />
+      </span>
     </Link>
   );
 }
