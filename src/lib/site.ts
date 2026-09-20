@@ -13,6 +13,9 @@ export const site = {
 /** Set to true to show the homepage my works pickup again. */
 export const showMyWorks = false;
 
+/** Set to true to publish /gallery/[slug] pages and the overlay "view" link. */
+export const showGalleryDetailPages = false;
+
 export const navItems = [
   { href: "/gallery", label: "Gallery" },
   { href: "/profile", label: "Profile" },

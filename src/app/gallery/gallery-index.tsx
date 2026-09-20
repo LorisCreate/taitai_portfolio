@@ -3,7 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { galleryFilters, type GalleryTag, type GalleryWork } from "@/lib/site";
+import {
+  galleryFilters,
+  showGalleryDetailPages,
+  type GalleryTag,
+  type GalleryWork,
+} from "@/lib/site";
 
 const SPACING = 30;
 
@@ -173,12 +178,14 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 </p>
                 <h2 className="mt-2 text-[16px] leading-8 tracking-[0.12em] md:text-[24px] md:leading-8">{front.title}</h2>
               </div>
-              <Link
-                href={`/gallery/${front.slug}`}
-                className="ff-en text-[16px] leading-8 tracking-[0.16em] underline"
-              >
-                view
-              </Link>
+              {showGalleryDetailPages ? (
+                <Link
+                  href={`/gallery/${front.slug}`}
+                  className="ff-en text-[16px] leading-8 tracking-[0.16em] underline"
+                >
+                  view
+                </Link>
+              ) : null}
             </figcaption>
             <button
               type="button"

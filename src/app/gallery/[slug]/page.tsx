@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { PageTitle } from "@/components/page-title";
 import { TextLink } from "@/components/text-link";
 import { getGalleryWork, listGalleryWorks } from "@/lib/gallery";
+import { showGalleryDetailPages } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -11,10 +12,14 @@ type Props = {
 };
 
 export function generateStaticParams() {
+  if (!showGalleryDetailPages) return [];
   return listGalleryWorks().map((work) => ({ slug: work.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
+  if (!showGalleryDetailPages) {
+    return { title: "Gallery", robots: { index: false, follow: false } };
+  }
   const { slug } = await params;
   const work = getGalleryWork(slug);
   return {
@@ -23,6 +28,10 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function GalleryWorkPage({ params }: Props) {
+  if (!showGalleryDetailPages) {
+    redirect("/gallery");
+  }
+
   const { slug } = await params;
   const work = getGalleryWork(slug);
 
