@@ -21,10 +21,11 @@ import {
 export const dynamic = "force-dynamic";
 
 export default function Home() {
+  const heroImages = listPublicFolderImages("hero");
   const mangaImages = listPublicFolderImages("manga");
   return (
     <main>
-      <HeroSlider />
+      <HeroSlider images={heroImages} />
 
       <div className="mx-auto max-w-[1200px] px-6 md:px-8">
         <section className="relative z-10 mt-8 flex justify-end md:-mt-28">

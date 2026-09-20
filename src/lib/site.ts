@@ -42,14 +42,6 @@ export const news = [
   },
 ];
 
-export const heroImages = [
-  "https://images.unsplash.com/photo-1493863641943-9b68992a8d07?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1487412941708-8c5d5d83d8e3?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=80",
-];
-
 export const aboutPortraitHome = "/about/aboutPortrait01.jpg";
 export const aboutPortraitProfile = "/about/aboutPortrait02.jpg";
 

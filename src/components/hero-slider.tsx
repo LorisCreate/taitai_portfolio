@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { heroImages, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
-export function HeroSlider() {
+export function HeroSlider({ images }: { images: string[] }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (images.length < 2) return;
     const id = window.setInterval(() => {
-      setIndex((current) => (current + 1) % heroImages.length);
+      setIndex((current) => (current + 1) % images.length);
     }, 5000);
     return () => window.clearInterval(id);
-  }, []);
+  }, [images.length]);
 
   return (
     <section className="hero-fv" aria-label="メインビジュアル">
@@ -20,7 +21,7 @@ export function HeroSlider() {
       </div>
 
       <div className="hero-fv__frame">
-        {heroImages.map((src, i) => (
+        {images.map((src, i) => (
           <div
             key={src}
             className={`hero-fv__slide ${
