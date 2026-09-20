@@ -10,13 +10,17 @@ import {
 } from "@/lib/site";
 
 const SPACING = 30;
+const OVERLAY_MS = 320;
 
 type Filter = (typeof galleryFilters)[number];
 
 function visibleWorksFor(allWorks: GalleryWork[], filter: Filter) {
-  return allWorks.filter(
-    (work) => filter === "ALL" || work.tag === filter,
-  );
+  return allWorks.filter((work) => filter === "ALL" || work.tag === filter);
+}
+
+function wrapIndex(index: number, count: number) {
+  if (count <= 0) return 0;
+  return ((index % count) + count) % count;
 }
 
 function wrapDelta(t: number, count: number) {
@@ -24,123 +28,104 @@ function wrapDelta(t: number, count: number) {
   return t - count * Math.round(t / count);
 }
 
-function trackScroll(track: HTMLDivElement) {
-  const rect = track.getBoundingClientRect();
-  const max = Math.max(rect.height - window.innerHeight, 1);
-  const scrolled = Math.min(Math.max(-rect.top, 0), max);
-  return { max, scrolled, progress: scrolled / max };
-}
-
 export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
-  const trackRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const touchYRef = useRef<number | null>(null);
+  const overlayLock = useRef(false);
   const [filter, setFilter] = useState<Filter>("ALL");
-  const [progress, setProgress] = useState(0);
-  const [frontSlug, setFrontSlug] = useState<string | null>(null);
+  const [offset, setOffset] = useState(0);
+  const [frontIndex, setFrontIndex] = useState<number | null>(null);
+  const [slide, setSlide] = useState(0);
+  const [slideAnimate, setSlideAnimate] = useState(false);
 
   const works = useMemo(
     () => visibleWorksFor(allWorks, filter),
     [allWorks, filter],
   );
+  const count = works.length;
 
-  const front = useMemo(
-    () => (frontSlug == null ? null : (works.find((work) => work.slug === frontSlug) ?? null)),
-    [frontSlug, works],
-  );
-
-  const stepFront = useCallback(
-    (delta: number) => {
-      setFrontSlug((current) => {
-        if (works.length === 0) return current;
-        const from = current
-          ? works.findIndex((work) => work.slug === current)
-          : 0;
-        const index = from < 0 ? 0 : from;
-        return works[(index + delta + works.length) % works.length].slug;
+  const nudgeOffset = useCallback(
+    (dy: number) => {
+      if (count <= 1) return;
+      const unit = Math.max(window.innerHeight * 0.7, 1);
+      setOffset((current) => {
+        const next = current + dy / unit;
+        return ((next % count) + count) % count;
       });
     },
-    [works],
-  );
-
-  const touchYRef = useRef<number | null>(null);
-
-  const updateProgress = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    setProgress(trackScroll(track).progress);
-  }, []);
-
-  const wrapIndexScroll = useCallback(
-    (direction: 1 | -1) => {
-      const track = trackRef.current;
-      if (!track || works.length <= 1) return false;
-      const { max, scrolled } = trackScroll(track);
-      const atTop = scrolled <= 2;
-      const atBottom = scrolled >= max - 2;
-      if (direction < 0 && atTop) {
-        window.scrollBy(0, max * ((works.length - 1) / works.length) - scrolled);
-        return true;
-      }
-      if (direction > 0 && atBottom) {
-        window.scrollBy(0, -scrolled);
-        return true;
-      }
-      return false;
-    },
-    [works.length],
+    [count],
   );
 
   useEffect(() => {
-    updateProgress();
-    const onScroll = () => {
-      updateProgress();
-    };
+    const stage = stageRef.current;
+    if (!stage) return;
+
     const onWheel = (event: WheelEvent) => {
-      if (frontSlug != null) return;
-      if (event.deltaY === 0) return;
-      if (wrapIndexScroll(event.deltaY > 0 ? 1 : -1)) {
-        event.preventDefault();
-      }
+      if (frontIndex != null || count <= 1) return;
+      event.preventDefault();
+      nudgeOffset(event.deltaY);
     };
     const onTouchStart = (event: TouchEvent) => {
       touchYRef.current = event.touches[0]?.clientY ?? null;
     };
     const onTouchMove = (event: TouchEvent) => {
-      if (frontSlug != null) return;
+      if (frontIndex != null || count <= 1) return;
       const y = event.touches[0]?.clientY;
       if (y == null || touchYRef.current == null) return;
       const dy = touchYRef.current - y;
-      if (Math.abs(dy) < 8) return;
-      if (wrapIndexScroll(dy > 0 ? 1 : -1)) {
-        event.preventDefault();
-        touchYRef.current = y;
-      }
+      if (Math.abs(dy) < 2) return;
+      event.preventDefault();
+      nudgeOffset(dy);
+      touchYRef.current = y;
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", updateProgress);
-    window.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
+
+    stage.addEventListener("wheel", onWheel, { passive: false });
+    stage.addEventListener("touchstart", onTouchStart, { passive: true });
+    stage.addEventListener("touchmove", onTouchMove, { passive: false });
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", updateProgress);
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
+      stage.removeEventListener("wheel", onWheel);
+      stage.removeEventListener("touchstart", onTouchStart);
+      stage.removeEventListener("touchmove", onTouchMove);
     };
-  }, [frontSlug, updateProgress, wrapIndexScroll, works.length]);
+  }, [count, frontIndex, nudgeOffset]);
 
   const selectFilter = (next: Filter) => {
     setFilter(next);
-    setFrontSlug(null);
-    setProgress(0);
+    setFrontIndex(null);
+    setOffset(0);
+    setSlide(0);
     window.scrollTo(0, 0);
   };
 
+  const openWork = (index: number) => {
+    setFrontIndex(index);
+    setSlide(0);
+    setSlideAnimate(false);
+  };
+
+  const stepFront = useCallback(
+    (delta: 1 | -1) => {
+      if (count <= 1 || overlayLock.current || frontIndex == null) return;
+      overlayLock.current = true;
+      setSlideAnimate(true);
+      setSlide(delta);
+      window.setTimeout(() => {
+        setFrontIndex((current) =>
+          current == null ? current : wrapIndex(current + delta, count),
+        );
+        setSlideAnimate(false);
+        setSlide(0);
+        overlayLock.current = false;
+      }, OVERLAY_MS);
+    },
+    [count, frontIndex],
+  );
+
   useEffect(() => {
-    if (frontSlug == null) return;
+    if (frontIndex == null) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setFrontSlug(null);
+        setFrontIndex(null);
         return;
       }
       if (event.key === "ArrowRight") {
@@ -159,29 +144,39 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [frontSlug, stepFront]);
+  }, [frontIndex, stepFront]);
 
-  const count = works.length;
-  const offset = count <= 1 ? 0 : progress * count;
+  const items = useMemo(() => {
+    if (count === 0) return [];
+    return works.map((work, index) => {
+      const t = wrapDelta(index - offset, count);
+      const x = t * SPACING;
+      const y = t * t * 4.2;
+      const rotate = t * 5.5;
+      const depth = 1 - Math.min(Math.abs(t) / 3.2, 1);
+      const scale = 0.72 + depth * 0.28;
+      const z = Math.round(depth * 40);
+      return { work, index, x, y, rotate, scale, z, opacity: 0.35 + depth * 0.65 };
+    });
+  }, [count, offset, works]);
 
-  const items = useMemo(
-    () =>
-      works.map((work, index) => {
-        const t = wrapDelta(index - offset, count);
-        const x = t * SPACING;
-        const y = t * t * 4.2;
-        const rotate = t * 5.5;
-        const depth = 1 - Math.min(Math.abs(t) / 3.2, 1);
-        const scale = 0.72 + depth * 0.28;
-        const z = Math.round(depth * 40);
-        return { work, x, y, rotate, scale, z, opacity: 0.35 + depth * 0.65 };
-      }),
-    [count, offset, works],
-  );
+  const overlaySlides =
+    frontIndex == null || count === 0
+      ? []
+      : [
+          works[wrapIndex(frontIndex - 1, count)],
+          works[frontIndex],
+          works[wrapIndex(frontIndex + 1, count)],
+        ];
+
+  const front = frontIndex == null ? null : works[frontIndex];
 
   return (
-    <div ref={trackRef} className="relative" style={{ height: `${Math.max(count, 4) * 70}vh` }}>
-      <div className="sticky top-[72px] h-[calc(100svh-72px)] overflow-hidden md:top-[88px] md:h-[calc(100svh-88px)] lg:top-[96px] lg:h-[calc(100svh-96px)]">
+    <div
+      ref={stageRef}
+      className="relative h-[calc(100svh-72px)] overflow-hidden overscroll-contain md:h-[calc(100svh-88px)] lg:h-[calc(100svh-96px)]"
+    >
+      <div className="absolute inset-0">
         <div className="absolute top-4 right-6 left-6 z-30 flex flex-col gap-4 md:top-8 md:right-8 md:left-8 md:flex-row md:items-start md:justify-between">
           <p className="ff-en pointer-events-none text-[16px] leading-8 tracking-[0.2em]">
             pickup works
@@ -220,11 +215,11 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 : "該当する作品はありません。"}
             </p>
           ) : (
-            items.map(({ work, x, y, rotate, scale, z, opacity }) => (
+            items.map(({ work, index, x, y, rotate, scale, z, opacity }) => (
               <button
                 key={work.slug}
                 type="button"
-                onClick={() => setFrontSlug(work.slug)}
+                onClick={() => openWork(index)}
                 className="gallery-card absolute top-1/2 left-1/2 h-[42vw] max-h-[416px] min-h-[208px] w-[30vw] max-w-[304px] min-w-[152px] origin-center cursor-pointer overflow-hidden bg-neutral-100 shadow-[0_16px_40px_rgba(0,0,0,0.12)] md:h-[46vh] md:w-[22vw]"
                 style={{
                   zIndex: z,
@@ -246,31 +241,46 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
         </div>
       </div>
 
-      {front ? (
+      {front && overlaySlides.length === 3 ? (
         <div
           className="fixed inset-0 z-[80] flex items-center justify-center bg-white/70 px-4 backdrop-blur-[2px]"
-          onClick={() => setFrontSlug(null)}
+          onClick={() => setFrontIndex(null)}
         >
           <figure
-            className="gallery-front relative w-full max-w-[520px]"
+            className="relative w-full max-w-[520px]"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100 shadow-[0_24px_56px_rgba(0,0,0,0.18)]">
-              <Image
-                src={front.images[0] ?? front.image}
-                alt={front.title}
-                fill
-                sizes="520px"
-                className="object-cover"
-                priority
-              />
+              <div
+                className="absolute inset-0 flex"
+                style={{
+                  width: "300%",
+                  transform: `translateX(${(-1 + slide) * (100 / 3)}%)`,
+                  transition: slideAnimate ? `transform ${OVERLAY_MS}ms ease` : "none",
+                }}
+              >
+                {overlaySlides.map((work, slot) => (
+                  <div key={`${work.slug}-${slot}`} className="relative h-full w-1/3 shrink-0">
+                    <Image
+                      src={work.images[0] ?? work.image}
+                      alt={work.title}
+                      fill
+                      sizes="520px"
+                      className="object-cover"
+                      priority={slot === 1}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             <figcaption className="mt-4 flex items-end justify-between gap-4">
               <div>
                 <p className="text-[16px] leading-8 tracking-[0.16em]">
                   {[front.tag, front.date].filter(Boolean).join("　/　")}
                 </p>
-                <h2 className="mt-2 text-[16px] leading-8 tracking-[0.12em] md:text-[24px] md:leading-8">{front.title}</h2>
+                <h2 className="mt-2 text-[16px] leading-8 tracking-[0.12em] md:text-[24px] md:leading-8">
+                  {front.title}
+                </h2>
               </div>
               {showGalleryDetailPages ? (
                 <Link
@@ -281,7 +291,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 </Link>
               ) : null}
             </figcaption>
-            {works.length > 1 ? (
+            {count > 1 ? (
               <div className="mt-8 flex items-center justify-between gap-8">
                 <button
                   type="button"
@@ -294,7 +304,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 <button
                   type="button"
                   className="ff-en h-8 text-[16px] leading-8 tracking-[0.18em]"
-                  onClick={() => setFrontSlug(null)}
+                  onClick={() => setFrontIndex(null)}
                 >
                   close
                 </button>
@@ -311,7 +321,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
               <button
                 type="button"
                 className="ff-en mt-8 text-[16px] leading-8 tracking-[0.18em]"
-                onClick={() => setFrontSlug(null)}
+                onClick={() => setFrontIndex(null)}
               >
                 close
               </button>
