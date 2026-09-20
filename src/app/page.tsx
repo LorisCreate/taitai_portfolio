@@ -12,6 +12,8 @@ import {
   mangaImages,
   news,
   photoImages,
+  showIllustration,
+  showManga,
   showMyWorks,
   site,
 } from "@/lib/site";
@@ -87,6 +89,7 @@ export default function Home() {
           </figure>
         </Reveal>
 
+        {showIllustration ? (
         <Reveal as="section" id="illustration" className="mt-24 md:mt-36">
             <h2 className="ff-mi text-[32px] leading-8 tracking-[0.2em] md:text-[40px] md:leading-10">
             イラスト描いています
@@ -123,6 +126,7 @@ export default function Home() {
             </div>
           </div>
         </Reveal>
+        ) : null}
 
         <Reveal as="section" id="animation" className="mt-24 md:mt-36">
             <h2 className="ff-mi text-[32px] leading-8 tracking-[0.2em] md:text-[40px] md:leading-10">
@@ -159,6 +163,7 @@ export default function Home() {
           </div>
         </Reveal>
 
+        {showManga ? (
         <Reveal as="section" id="manga" className="mt-24 md:mt-36">
             <h2 className="ff-mi text-[32px] leading-8 tracking-[0.2em] md:text-[40px] md:leading-10">
             漫画
@@ -197,6 +202,7 @@ export default function Home() {
             </div>
           </div>
         </Reveal>
+        ) : null}
 
         {showMyWorks ? (
           <Reveal as="section" id="works" className="mt-24 md:mt-36">

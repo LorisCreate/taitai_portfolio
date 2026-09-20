@@ -13,6 +13,12 @@ export const site = {
 /** Set to true to show the homepage my works pickup again. */
 export const showMyWorks = false;
 
+/** Set to true to show the homepage illustration block again. */
+export const showIllustration = false;
+
+/** Set to true to show the homepage manga block again. */
+export const showManga = false;
+
 /** Set to true to publish /gallery/[slug] pages and the overlay "view" link. */
 export const showGalleryDetailPages = false;
 
