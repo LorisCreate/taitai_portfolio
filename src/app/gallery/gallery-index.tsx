@@ -19,6 +19,18 @@ function visibleWorksFor(allWorks: GalleryWork[], filter: Filter) {
   );
 }
 
+function wrapDelta(t: number, count: number) {
+  if (count <= 1) return t;
+  return t - count * Math.round(t / count);
+}
+
+function trackScroll(track: HTMLDivElement) {
+  const rect = track.getBoundingClientRect();
+  const max = Math.max(rect.height - window.innerHeight, 1);
+  const scrolled = Math.min(Math.max(-rect.top, 0), max);
+  return { max, scrolled, progress: scrolled / max };
+}
+
 export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState<Filter>("ALL");
@@ -49,24 +61,73 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
     [works],
   );
 
+  const touchYRef = useRef<number | null>(null);
+
   const updateProgress = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
-    const rect = track.getBoundingClientRect();
-    const max = Math.max(rect.height - window.innerHeight, 1);
-    const scrolled = Math.min(Math.max(-rect.top, 0), max);
-    setProgress(scrolled / max);
+    setProgress(trackScroll(track).progress);
   }, []);
+
+  const wrapIndexScroll = useCallback(
+    (direction: 1 | -1) => {
+      const track = trackRef.current;
+      if (!track || works.length <= 1) return false;
+      const { max, scrolled } = trackScroll(track);
+      const atTop = scrolled <= 2;
+      const atBottom = scrolled >= max - 2;
+      if (direction < 0 && atTop) {
+        window.scrollBy(0, max * ((works.length - 1) / works.length) - scrolled);
+        return true;
+      }
+      if (direction > 0 && atBottom) {
+        window.scrollBy(0, -scrolled);
+        return true;
+      }
+      return false;
+    },
+    [works.length],
+  );
 
   useEffect(() => {
     updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
-    return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
+    const onScroll = () => {
+      updateProgress();
     };
-  }, [updateProgress, works.length]);
+    const onWheel = (event: WheelEvent) => {
+      if (frontSlug != null) return;
+      if (event.deltaY === 0) return;
+      if (wrapIndexScroll(event.deltaY > 0 ? 1 : -1)) {
+        event.preventDefault();
+      }
+    };
+    const onTouchStart = (event: TouchEvent) => {
+      touchYRef.current = event.touches[0]?.clientY ?? null;
+    };
+    const onTouchMove = (event: TouchEvent) => {
+      if (frontSlug != null) return;
+      const y = event.touches[0]?.clientY;
+      if (y == null || touchYRef.current == null) return;
+      const dy = touchYRef.current - y;
+      if (Math.abs(dy) < 8) return;
+      if (wrapIndexScroll(dy > 0 ? 1 : -1)) {
+        event.preventDefault();
+        touchYRef.current = y;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateProgress);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+    };
+  }, [frontSlug, updateProgress, wrapIndexScroll, works.length]);
 
   const selectFilter = (next: Filter) => {
     setFilter(next);
@@ -101,12 +162,12 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
   }, [frontSlug, stepFront]);
 
   const count = works.length;
-  const offset = progress * Math.max(count - 1, 1);
+  const offset = count <= 1 ? 0 : progress * count;
 
   const items = useMemo(
     () =>
       works.map((work, index) => {
-        const t = index - offset;
+        const t = wrapDelta(index - offset, count);
         const x = t * SPACING;
         const y = t * t * 4.2;
         const rotate = t * 5.5;
@@ -115,7 +176,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
         const z = Math.round(depth * 40);
         return { work, x, y, rotate, scale, z, opacity: 0.35 + depth * 0.65 };
       }),
-    [offset, works],
+    [count, offset, works],
   );
 
   return (
