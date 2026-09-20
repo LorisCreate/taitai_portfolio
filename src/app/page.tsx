@@ -7,9 +7,9 @@ import { TextLink } from "@/components/text-link";
 import { WorksSlider } from "@/components/works-slider";
 import { XTimeline } from "@/components/x-timeline";
 import { listPublicFolderImages } from "@/lib/public-images";
+import { latestEventNotices } from "@/lib/events";
 import {
   aboutPortraitHome,
-  news,
   photoImages,
   showIllustration,
   showManga,
@@ -23,6 +23,7 @@ export default function Home() {
   const heroImages = listPublicFolderImages("hero");
   const illustrationImages = listPublicFolderImages("illustration");
   const mangaImages = listPublicFolderImages("manga");
+  const notices = latestEventNotices(3);
   return (
     <main>
       <HeroSlider images={heroImages} />
@@ -35,16 +36,16 @@ export default function Home() {
               <TextLink href="/event">all view</TextLink>
             </div>
             <div className="mt-4 space-y-2">
-              {news.map((item) => (
+              {notices.map((item) => (
                 <a
-                  key={item.title}
-                  href={item.href}
+                  key={item.id}
+                  href="/event"
                   className="flex gap-4 py-2 text-[16px] leading-8"
                 >
                   <span className="ff-en relative min-w-[88px] pr-4 after:absolute after:top-1/2 after:right-0 after:h-4 after:w-px after:-translate-y-1/2 after:bg-black">
-                    {item.date}
+                    {item.updated}
                   </span>
-                  <span>{item.title}</span>
+                  <span>{item.body}</span>
                 </a>
               ))}
             </div>

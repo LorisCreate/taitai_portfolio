@@ -29,19 +29,6 @@ export const navItems = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export const news = [
-  {
-    date: "2026.09.01",
-    title: "秋のポートレート撮影会を開催します",
-    href: "/event",
-  },
-  {
-    date: "2026.06.12",
-    title: "2026年度のご依頼受付を開始しました",
-    href: "/contact",
-  },
-];
-
 export const aboutPortraitHome = "/about/aboutPortrait01.jpg";
 export const aboutPortraitProfile = "/about/aboutPortrait02.jpg";
 
@@ -97,24 +84,3 @@ export type GalleryWork = {
 };
 
 export const galleryCategories = galleryFilters;
-
-export const events = [
-  {
-    date: "2026.11.08 – 11.23",
-    place: "仙台・秋保",
-    title: "個展「あたたかな余白」",
-    body: "日常の光と、旅先で出会った景色を並べる写真展。会期中は週末のみ在廊します。",
-  },
-  {
-    date: "2026.09.27",
-    place: "仙台オフィス",
-    title: "秋のポートレート撮影会",
-    body: "自然光を活かした少人数制の撮影会。服装の相談からプリントまでサポートします。",
-  },
-  {
-    date: "2026.04.12",
-    place: "オンライン",
-    title: "写真とウェブの collab talk",
-    body: "ポートフォリオサイトの作り方と、写真の見せ方についてのトークイベント。",
-  },
-];
