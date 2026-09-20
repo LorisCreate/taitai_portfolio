@@ -48,10 +48,15 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
     (dy: number) => {
       if (count <= 1) return;
       const unit = Math.max(window.innerHeight * 0.7, 1);
-      setOffset((current) => {
-        const next = current + dy / unit;
-        return ((next % count) + count) % count;
-      });
+      setOffset((current) => current + dy / unit);
+    },
+    [count],
+  );
+
+  const stepList = useCallback(
+    (delta: 1 | -1) => {
+      if (count <= 1) return;
+      setOffset((current) => Math.round(current) + delta);
     },
     [count],
   );
@@ -170,6 +175,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
         ];
 
   const front = frontIndex == null ? null : works[frontIndex];
+  const currentNo = count ? wrapIndex(Math.round(offset), count) + 1 : 0;
 
   return (
     <div
@@ -240,6 +246,36 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
           )}
         </div>
       </div>
+
+      {count > 0 ? (
+        <div className="gallery-pager" role="group" aria-label="作品送り">
+          <button
+            type="button"
+            className="gallery-pager__btn"
+            onClick={() => stepList(-1)}
+            aria-label="前の作品"
+            disabled={count <= 1}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+              <path fill="none" stroke="currentColor" strokeWidth="1.5" d="M10 3 5 8l5 5" />
+            </svg>
+          </button>
+          <p className="gallery-pager__count ff-en text-[16px]" aria-live="polite">
+            {currentNo} / {count}
+          </p>
+          <button
+            type="button"
+            className="gallery-pager__btn"
+            onClick={() => stepList(1)}
+            aria-label="次の作品"
+            disabled={count <= 1}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+              <path fill="none" stroke="currentColor" strokeWidth="1.5" d="m6 3 5 5-5 5" />
+            </svg>
+          </button>
+        </div>
+      ) : null}
 
       {front && overlaySlides.length === 3 ? (
         <div

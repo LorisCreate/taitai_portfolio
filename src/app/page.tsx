@@ -261,7 +261,7 @@ export default function Home() {
           <div className="mx-auto mt-8 max-w-md">
             <Link
               href="/contact"
-              className="home-cta w-full border border-black py-4 text-[16px] leading-8 tracking-[0.12em]"
+              className="home-cta w-full text-[16px] leading-8 tracking-[0.12em]"
             >
               お問合わせはこちらから
               <span className="text-link__arrow" aria-hidden="true">

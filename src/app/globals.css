@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #dceef6;
+  --background: #f4f1ea;
   --foreground: #000000;
-  --washi-image: url("/washi-blue.jpg");
+  --washi-image: url("/washi-white.svg");
+  --washi-pink: url("/washi-pink.svg");
+  --accent: #f597af;
+  --cta: #444444;
 }
 
 @theme inline {
@@ -22,7 +25,7 @@ html {
 html,
 body,
 .bg-washi {
-  background-color: #dceef6;
+  background-color: #f4f1ea;
   background-image: var(--washi-image);
   background-repeat: repeat;
   background-size: 416px 416px;
@@ -50,25 +53,22 @@ body {
 
 .text-link {
   align-items: center;
+  background: var(--cta);
+  border-radius: 999px;
+  color: #fff;
   display: inline-flex;
   gap: 8px;
-  letter-spacing: 0.16em;
+  justify-content: center;
+  letter-spacing: 0.08em;
   line-height: 32px;
+  min-height: 48px;
+  padding: 8px 24px 8px 32px;
   position: relative;
+  text-decoration: none;
 }
 
 .text-link__label {
   position: relative;
-}
-
-.text-link__label::after {
-  background: currentColor;
-  bottom: -8px;
-  content: "";
-  height: 1px;
-  left: 0;
-  position: absolute;
-  width: 100%;
 }
 
 .text-link__arrow {
@@ -114,9 +114,15 @@ body {
 
 .home-cta {
   align-items: center;
+  background: var(--cta);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
   display: inline-flex;
   gap: 8px;
   justify-content: center;
+  min-height: 48px;
+  padding: 8px 24px 8px 32px;
 }
 
 .home-cta .text-link__arrow {
@@ -237,7 +243,7 @@ body {
 
 .gallery-filter {
   background: #fff;
-  border: 1px solid #f78a05;
+  border: 1px solid #f597af;
   border-radius: 8px;
   color: #5a401a;
   letter-spacing: 0.08em;
@@ -249,12 +255,59 @@ body {
 }
 
 .gallery-filter.is-on {
-  background: #f78a05;
-  border-color: #f78a05;
+  background: #f597af;
+  border-color: #f597af;
   color: #fff;
 }
 
+.gallery-pager {
+  align-items: center;
+  bottom: 24px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  z-index: 30;
+}
+
+.gallery-pager__btn,
+.gallery-pager__count {
+  pointer-events: auto;
+}
+
+.gallery-pager__btn {
+  align-items: center;
+  background: #f597af;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.gallery-pager__btn svg {
+  display: block;
+}
+
+.gallery-pager__count {
+  color: #f597af;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  line-height: 32px;
+  min-width: 72px;
+  text-align: center;
+}
+
 .hero-fv {
+  background-color: #f597af;
+  background-image: var(--washi-pink);
+  background-repeat: repeat;
+  background-size: 416px 416px;
   height: 100svh;
   margin-top: -72px;
   overflow: hidden;
@@ -262,15 +315,18 @@ body {
 }
 
 .hero-fv::after {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: #f597af;
+  background-image: var(--washi-pink);
+  background-repeat: repeat;
+  background-size: 416px 416px;
   content: "";
   height: 100%;
   left: 0;
-  max-width: 50rem;
   pointer-events: none;
   position: absolute;
   top: 0;
-  width: 58%;
+  width: 11%;
+  min-width: 48px;
   z-index: 1;
 }
 
