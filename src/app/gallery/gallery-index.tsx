@@ -6,7 +6,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   galleryFilters,
   showGalleryDetailPages,
-  type GalleryTag,
   type GalleryWork,
 } from "@/lib/site";
 
@@ -14,31 +13,40 @@ const SPACING = 30;
 
 type Filter = (typeof galleryFilters)[number];
 
+function visibleWorksFor(allWorks: GalleryWork[], filter: Filter) {
+  return allWorks.filter(
+    (work) => filter === "ALL" || work.tag === filter,
+  );
+}
+
 export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState<Filter>("ALL");
   const [progress, setProgress] = useState(0);
-  const [frontIndex, setFrontIndex] = useState<number | null>(null);
+  const [frontSlug, setFrontSlug] = useState<string | null>(null);
 
   const works = useMemo(
-    () =>
-      filter === "ALL"
-        ? allWorks
-        : allWorks.filter((work) => work.tag === (filter as GalleryTag)),
+    () => visibleWorksFor(allWorks, filter),
     [allWorks, filter],
   );
 
-  const front = frontIndex == null ? null : (works[frontIndex] ?? null);
+  const front = useMemo(
+    () => (frontSlug == null ? null : (works.find((work) => work.slug === frontSlug) ?? null)),
+    [frontSlug, works],
+  );
 
   const stepFront = useCallback(
     (delta: number) => {
-      if (works.length === 0) return;
-      setFrontIndex((current) => {
-        const from = current ?? 0;
-        return (from + delta + works.length) % works.length;
+      setFrontSlug((current) => {
+        if (works.length === 0) return current;
+        const from = current
+          ? works.findIndex((work) => work.slug === current)
+          : 0;
+        const index = from < 0 ? 0 : from;
+        return works[(index + delta + works.length) % works.length].slug;
       });
     },
-    [works.length],
+    [works],
   );
 
   const updateProgress = useCallback(() => {
@@ -62,16 +70,16 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
 
   const selectFilter = (next: Filter) => {
     setFilter(next);
-    setFrontIndex(null);
+    setFrontSlug(null);
     setProgress(0);
     window.scrollTo(0, 0);
   };
 
   useEffect(() => {
-    if (frontIndex == null) return;
+    if (frontSlug == null) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setFrontIndex(null);
+        setFrontSlug(null);
         return;
       }
       if (event.key === "ArrowRight") {
@@ -90,7 +98,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [frontIndex, stepFront]);
+  }, [frontSlug, stepFront]);
 
   const count = works.length;
   const offset = progress * Math.max(count - 1, 1);
@@ -151,11 +159,11 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 : "該当する作品はありません。"}
             </p>
           ) : (
-            items.map(({ work, x, y, rotate, scale, z, opacity }, index) => (
+            items.map(({ work, x, y, rotate, scale, z, opacity }) => (
               <button
                 key={work.slug}
                 type="button"
-                onClick={() => setFrontIndex(index)}
+                onClick={() => setFrontSlug(work.slug)}
                 className="gallery-card absolute top-1/2 left-1/2 h-[42vw] max-h-[416px] min-h-[208px] w-[30vw] max-w-[304px] min-w-[152px] origin-center cursor-pointer overflow-hidden bg-neutral-100 shadow-[0_16px_40px_rgba(0,0,0,0.12)] md:h-[46vh] md:w-[22vw]"
                 style={{
                   zIndex: z,
@@ -180,7 +188,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
       {front ? (
         <div
           className="fixed inset-0 z-[80] flex items-center justify-center bg-white/70 px-4 backdrop-blur-[2px]"
-          onClick={() => setFrontIndex(null)}
+          onClick={() => setFrontSlug(null)}
         >
           <figure
             className="gallery-front relative w-full max-w-[520px]"
@@ -225,7 +233,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 <button
                   type="button"
                   className="ff-en h-8 text-[16px] leading-8 tracking-[0.18em]"
-                  onClick={() => setFrontIndex(null)}
+                  onClick={() => setFrontSlug(null)}
                 >
                   close
                 </button>
@@ -242,7 +250,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
               <button
                 type="button"
                 className="ff-en mt-8 text-[16px] leading-8 tracking-[0.18em]"
-                onClick={() => setFrontIndex(null)}
+                onClick={() => setFrontSlug(null)}
               >
                 close
               </button>
