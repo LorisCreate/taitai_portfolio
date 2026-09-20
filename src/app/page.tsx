@@ -6,10 +6,10 @@ import { Reveal } from "@/components/reveal";
 import { TextLink } from "@/components/text-link";
 import { WorksSlider } from "@/components/works-slider";
 import { XTimeline } from "@/components/x-timeline";
+import { listPublicFolderImages } from "@/lib/public-images";
 import {
   aboutPortraitHome,
   designImages,
-  mangaImages,
   news,
   photoImages,
   showIllustration,
@@ -18,7 +18,10 @@ import {
   site,
 } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
+  const mangaImages = listPublicFolderImages("manga");
   return (
     <main>
       <HeroSlider />
@@ -175,7 +178,9 @@ export default function Home() {
             {mangaImages.map((src, i) => (
               <figure
                 key={src}
-                className={i === 1 ? "hidden md:block" : undefined}
+                className={
+                  mangaImages.length === 3 && i === 1 ? "hidden md:block" : undefined
+                }
               >
                 <Image
                   src={src}

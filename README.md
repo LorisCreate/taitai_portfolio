@@ -48,3 +48,5 @@ RESEND_FROM_EMAIL=onboarding@resend.dev
 作品詳細（`/gallery/[slug]`）は非公開です。グリッドの拡大オーバーレイのみ出します。再び公開するときは `src/lib/site.ts` の `showGalleryDetailPages` を `true` にしてください。
 
 トップ「わたしのこと」は `public/about/aboutPortrait01.jpg`、Profile は `public/about/aboutPortrait02.jpg` です。画像本体はこのリポジトリに含めず、ローカルの `public/about/` に置いてください。
+
+トップの漫画ブロックは `public/manga/` の jpg / png / webp をファイル名順で全部出します。WSL 側にファイルがある場合は `git pull` のうえ、その `public/manga/` をコミットしてください。
