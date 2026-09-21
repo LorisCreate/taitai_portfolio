@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Jost, Noto_Sans_JP, Shippori_Mincho } from "next/font/google";
+import Script from "next/script";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-12F6GB7V18";
 
 const jost = Jost({
   variable: "--font-jost",
@@ -36,6 +39,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${jost.variable} ${notoSans.variable} ${mincho.variable} h-full antialiased`}
     >
       <body className="min-h-full text-black">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <SiteHeader />
         <div className="pt-[72px] md:pt-[88px] lg:pt-[96px]">{children}</div>
         <SiteFooter />
