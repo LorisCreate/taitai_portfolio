@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Jost, Noto_Sans_JP, Shippori_Mincho } from "next/font/google";
-import Script from "next/script";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -38,19 +37,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ja"
       className={`${jost.variable} ${notoSans.variable} ${mincho.variable} h-full antialiased`}
     >
-      <body className="min-h-full text-black">
-        <Script
+      <head>
+        <script
+          async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
-          `}
-        </Script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');`,
+          }}
+        />
+      </head>
+      <body className="min-h-full text-black">
         <SiteHeader />
         <div className="pt-[72px] md:pt-[88px] lg:pt-[96px]">{children}</div>
         <SiteFooter />
