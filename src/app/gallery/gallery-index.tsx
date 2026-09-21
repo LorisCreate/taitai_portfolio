@@ -260,6 +260,12 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
       draggingRef.current = false;
       if (count <= 1) return;
       settleTo(snapOffset(displayRef.current, gesture.velocity));
+      if (gesture.moved > 10) {
+        skipClickRef.current = true;
+        window.setTimeout(() => {
+          skipClickRef.current = false;
+        }, 400);
+      }
     };
 
     stage.addEventListener("wheel", onWheel, { passive: false });
