@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   title: "ATELIER 516｜たいたい",
   description:
     "デザインと写真で、大切な人やモノをより輝かせるクリエイター。WEB制作、グラフィック、写真撮影をお受けしています。",
+  verification: {
+    google: "X235aG3uIOD2QjwjXuVci2pJvoyoq0CjGy3L4yoBibM",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
