@@ -445,7 +445,71 @@ body {
 }
 
 .gallery-card {
+  height: 68vw;
+  max-height: 320px;
+  max-width: 256px;
+  width: 54vw;
+  --dx: 0;
+  --dy: 0;
+  --dr: 0;
+  --ds: 1;
+  --do: 1;
+  --dz: 1;
+  --gx: 0;
+  --gs: 1;
+  --go: 1;
+  --pz: 1;
+  --gclip: none;
+  --gpe: auto;
+  clip-path: var(--gclip);
+  opacity: var(--go);
+  pointer-events: var(--gpe);
+  transform: translate(-50%, -50%) translate(calc(var(--gx) * 1vw), 0) scale(var(--gs));
   will-change: transform, opacity;
+  z-index: var(--pz);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-orbit {
+  display: none;
+}
+
+.gallery-swipe-hint {
+  bottom: 76px;
+  color: rgba(90, 64, 26, 0.32);
+  font-size: 16px;
+  left: 0;
+  letter-spacing: 0.22em;
+  line-height: 24px;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  z-index: 20;
+}
+
+@media (min-width: 768px) {
+  .gallery-card {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    clip-path: none;
+    height: 46vh;
+    max-height: none;
+    max-width: none;
+    opacity: var(--do);
+    pointer-events: auto;
+    transform: translate(-50%, -58%) translate(calc(var(--dx) * 1vw), calc(var(--dy) * 1vh))
+      rotate(calc(var(--dr) * 1deg)) scale(var(--ds));
+    width: 22vw;
+    z-index: var(--dz);
+  }
+
+  .gallery-orbit {
+    display: block;
+  }
+
+  .gallery-swipe-hint {
+    display: none;
+  }
 }
 
 .gallery-front {

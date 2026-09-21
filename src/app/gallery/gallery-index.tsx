@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   galleryFilters,
   showGalleryDetailPages,
@@ -429,13 +429,25 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
     if (count === 0) return [];
     return works.map((work, index) => {
       const t = wrapDelta(index - offset, count);
-      const x = t * SPACING;
-      const y = t * t * 4.2;
-      const rotate = t * 5.5;
-      const depth = 1 - Math.min(Math.abs(t) / 3.2, 1);
-      const scale = 0.72 + depth * 0.28;
-      const z = Math.round(depth * 40);
-      return { work, index, x, y, rotate, scale, z, opacity: 0.35 + depth * 0.65 };
+      const abs = Math.abs(t);
+      const side = Math.min(abs, 1);
+      const depth = 1 - Math.min(abs / 3.2, 1);
+      return {
+        work,
+        index,
+        phoneX: t * 38,
+        phoneScale: 1 - side * 0.58,
+        phoneOpacity: abs > 1.16 ? 0 : 1 - side * 0.8,
+        phoneZ: Math.round((1 - side) * 40),
+        phoneClip: side > 0.2 ? "circle(closest-side at 50% 50%)" : "none",
+        phonePe: abs > 1.05 ? "none" : "auto",
+        x: t * SPACING,
+        y: t * t * 4.2,
+        rotate: t * 5.5,
+        scale: 0.72 + depth * 0.28,
+        z: Math.round(depth * 40),
+        opacity: 0.35 + depth * 0.65,
+      };
     });
   }, [count, offset, works]);
 
@@ -488,7 +500,7 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
         </div>
 
         <div className="absolute inset-0">
-          <div className="pointer-events-none absolute top-[18%] right-[-20%] left-[-20%] h-[70%] rounded-[50%] border border-black/10" />
+          <div className="gallery-orbit pointer-events-none absolute top-[18%] right-[-20%] left-[-20%] h-[70%] rounded-[50%] border border-black/10" />
           {count === 0 ? (
             <p className="absolute inset-0 flex items-center justify-center px-8 text-center text-[16px] leading-8 tracking-[0.08em]">
               {allWorks.length === 0
@@ -496,24 +508,36 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
                 : "該当する作品はありません。"}
             </p>
           ) : (
-            items.map(({ work, index, x, y, rotate, scale, z, opacity }) => (
+            items.map((item) => (
               <button
-                key={work.slug}
+                key={item.work.slug}
                 type="button"
-                onClick={() => openWork(index)}
-                className="gallery-card absolute top-1/2 left-1/2 h-[42vw] max-h-[416px] min-h-[208px] w-[30vw] max-w-[304px] min-w-[152px] origin-center cursor-pointer overflow-hidden bg-neutral-100 shadow-[0_16px_40px_rgba(0,0,0,0.12)] md:h-[46vh] md:w-[22vw]"
-                style={{
-                  zIndex: z,
-                  opacity,
-                  transform: `translate(-50%, -58%) translate(${x}vw, ${y}vh) rotate(${rotate}deg) scale(${scale})`,
-                }}
-                aria-label={`${work.title}を前面に表示`}
+                onClick={() => openWork(item.index)}
+                className="gallery-card absolute top-1/2 left-1/2 origin-center cursor-pointer overflow-hidden bg-neutral-100"
+                style={
+                  {
+                    "--gx": String(item.phoneX),
+                    "--gs": String(item.phoneScale),
+                    "--go": String(item.phoneOpacity),
+                    "--pz": String(item.phoneZ),
+                    "--gclip": item.phoneClip,
+                    "--gpe": item.phonePe,
+                    "--dx": String(item.x),
+                    "--dy": String(item.y),
+                    "--dr": String(item.rotate),
+                    "--ds": String(item.scale),
+                    "--do": String(item.opacity),
+                    "--dz": String(item.z),
+                  } as CSSProperties
+                }
+                aria-hidden={item.phoneOpacity === 0 ? true : undefined}
+                aria-label={`${item.work.title}を前面に表示`}
               >
                 <Image
-                  src={work.image}
-                  alt={work.title}
+                  src={item.work.image}
+                  alt={item.work.title}
                   fill
-                  sizes="(max-width: 768px) 45vw, 22vw"
+                  sizes="(max-width: 768px) 54vw, 22vw"
                   className="object-cover"
                 />
               </button>
@@ -521,6 +545,12 @@ export function GalleryIndex({ works: allWorks }: { works: GalleryWork[] }) {
           )}
         </div>
       </div>
+
+      {count > 1 ? (
+        <p className="gallery-swipe-hint ff-en" aria-hidden="true">
+          ←Swipe→
+        </p>
+      ) : null}
 
       {count > 0 ? (
         <div className="gallery-pager" role="group" aria-label="作品送り" data-gallery-chrome>
