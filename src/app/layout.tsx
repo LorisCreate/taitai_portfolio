@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
-const GA_MEASUREMENT_ID = "G-12F6GB7V18";
+const GA_MEASUREMENT_ID = "G-HNVC1XM8XS";
 
 const jost = Jost({
   variable: "--font-jost",
