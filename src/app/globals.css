@@ -437,8 +437,15 @@ body {
   }
 }
 
+.gallery-stage,
+.gallery-stage .gallery-card,
+.gallery-overlay-frame {
+  touch-action: none;
+  user-select: none;
+}
+
 .gallery-card {
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 .gallery-front {
