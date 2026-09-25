@@ -11,6 +11,16 @@ npm run dev
 
 ブラウザで http://localhost:43123 を開きます。ポートは `package.json` の `dev` スクリプトで指定しています。
 
+## OGP / ファビコン
+
+カノニカル URL は `https://www.taitai-illustrations.com` です。`src/app/layout.tsx` の `metadataBase` / Open Graph / Twitter Card から出しています。
+
+- OGP 画像: `public/og.jpg`（1200×1200）。元画像はホームページ「わたしのこと」の `public/about/aboutPortrait01.jpg`
+- ファビコン: `src/app/icon.png`（192×192）と `src/app/favicon.ico`（32×32）
+- Apple Touch Icon: `src/app/apple-icon.png`（180×180）
+
+ファビコンは同じポートレートの顔まわりを正方形にトリミングしています。再生成する場合は `aboutPortrait01.jpg` から作り直してください。
+
 ## お問い合わせフォーム
 
 Contact の送信先は `taitaisubad@gmail.com` です。送信には [Resend](https://resend.com) を使います。キーが無いときは Thank you を出さず、画面に失敗を表示します。

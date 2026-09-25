@@ -5,6 +5,17 @@ import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-HNVC1XM8XS";
+const SITE_URL = "https://www.taitai-illustrations.com";
+const SITE_TITLE = "ATELIER 516｜たいたい";
+const SITE_DESCRIPTION =
+  "デザインと写真で、大切な人やモノをより輝かせるクリエイター。WEB制作、グラフィック、写真撮影をお受けしています。";
+// OGP image is a 1200×1200 resize of public/about/aboutPortrait01.jpg
+const OG_IMAGE = {
+  url: "/og.jpg",
+  width: 1200,
+  height: 1200,
+  alt: SITE_TITLE,
+};
 
 const jost = Jost({
   variable: "--font-jost",
@@ -23,11 +34,26 @@ const mincho = Shippori_Mincho({
 });
 
 export const metadata: Metadata = {
-  title: "ATELIER 516｜たいたい",
-  description:
-    "デザインと写真で、大切な人やモノをより輝かせるクリエイター。WEB制作、グラフィック、写真撮影をお受けしています。",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   verification: {
     google: "X235aG3uIOD2QjwjXuVci2pJvoyoq0CjGy3L4yoBibM",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    siteName: SITE_TITLE,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
