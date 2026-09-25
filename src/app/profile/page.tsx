@@ -4,7 +4,7 @@ import { TextLink } from "@/components/text-link";
 import { aboutPortraitProfile } from "@/lib/site";
 
 export const metadata = {
-  title: "Profile｜ATELIER 516",
+  title: "Profile｜ATELIER",
 };
 
 const timeline = [

@@ -1,5 +1,5 @@
 export const site = {
-  name: "ATELIER 516",
+  name: "ATELIER",
   person: "たいたい",
   role: "PHOTOGRAPHER",
   tagline:

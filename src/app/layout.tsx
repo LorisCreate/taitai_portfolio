@@ -6,7 +6,7 @@ import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-HNVC1XM8XS";
 const SITE_URL = "https://www.taitai-illustrations.com";
-const SITE_TITLE = "ATELIER 516｜たいたい";
+const SITE_TITLE = "ATELIER｜たいたい";
 const SITE_DESCRIPTION =
   "デザインと写真で、大切な人やモノをより輝かせるクリエイター。WEB制作、グラフィック、写真撮影をお受けしています。";
 // OGP image is a 1200×630 crop of the TAI + character illustration.
