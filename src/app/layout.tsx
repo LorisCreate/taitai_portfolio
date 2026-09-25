@@ -9,11 +9,11 @@ const SITE_URL = "https://www.taitai-illustrations.com";
 const SITE_TITLE = "ATELIER 516｜たいたい";
 const SITE_DESCRIPTION =
   "デザインと写真で、大切な人やモノをより輝かせるクリエイター。WEB制作、グラフィック、写真撮影をお受けしています。";
-// OGP image is a 1200×1200 resize of public/about/aboutPortrait01.jpg
+// OGP image is a 1200×630 crop of the TAI + character illustration.
 const OG_IMAGE = {
   url: "/og.jpg",
   width: 1200,
-  height: 1200,
+  height: 630,
   alt: SITE_TITLE,
 };
 

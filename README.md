@@ -15,11 +15,11 @@ npm run dev
 
 カノニカル URL は `https://www.taitai-illustrations.com` です。`src/app/layout.tsx` の `metadataBase` / Open Graph / Twitter Card から出しています。
 
-- OGP 画像: `public/og.jpg`（1200×1200）。元画像はホームページ「わたしのこと」の `public/about/aboutPortrait01.jpg`
-- ファビコン: `src/app/icon.png`（192×192）と `src/app/favicon.ico`（32×32）
+- OGP 画像: `public/og.jpg`（1200×630）。元画像は TAI ロゴとキャラクターの横長イラスト
+- ファビコン: `src/app/icon.png`（32×32）と `src/app/favicon.ico`（16 / 24 / 32）
 - Apple Touch Icon: `src/app/apple-icon.png`（180×180）
 
-ファビコンは同じポートレートの顔まわりを正方形にトリミングしています。再生成する場合は `aboutPortrait01.jpg` から作り直してください。
+ファビコンはデザイナー提供の ICO（TAI マーク）です。ポートレートの切り抜きは使いません。
 
 ## お問い合わせフォーム
 
